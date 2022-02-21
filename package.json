@@ -26,6 +26,8 @@
   "_moduleAliases": {
     "@": "src",
     "@app": "src/app.js",
-    "config": "config/"
+    "config": "config/index.js",
+    "@api/controllers/log": "src/api/controllers/log.controller.js",
+    "routes/log": "routes/log.route.js"
   }
 }

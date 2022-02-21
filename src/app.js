@@ -1,8 +1,8 @@
 const express = require('express')
+const logRoutes = require('routes/log')
+
 const app = express()
 
-app.use('/', (req, res) => {
-    res.send('Hello world!')
-})
+app.use('/', logRoutes)
 
 module.exports = app
