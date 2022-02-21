@@ -1,0 +1,31 @@
+{
+  "name": "meetfood-api",
+  "version": "1.0.0",
+  "description": "Api para o projeto web meetFood contendo todas as funcionalidades back-end.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jadson-Js/meetfood-api.git"
+  },
+  "author": "Jadson-Js",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jadson-Js/meetfood-api/issues"
+  },
+  "homepage": "https://github.com/Jadson-Js/meetfood-api#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "module-alias": "^2.2.2"
+  },
+  "devDependencies": {},
+  "_moduleAliases": {
+    "@": "src",
+    "@app": "src/app.js",
+    "config": "config/"
+  }
+}
