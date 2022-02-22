@@ -1,8 +1,8 @@
 const express = require('express')
-const logRoutes = require('routes/log')
+const usersRoute = require('routes/users')
 
 const app = express()
 
-app.use('/', logRoutes)
+app.use('/', usersRoute)
 
 module.exports = app

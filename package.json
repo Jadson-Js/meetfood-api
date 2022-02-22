@@ -23,17 +23,22 @@
     "express": "^4.17.3",
     "module-alias": "^2.2.2",
     "mysql": "^2.18.1",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.16.2",
+    "sqlite3": "^5.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
+  },
   "_moduleAliases": {
     "@": "src",
     "@app": "src/app.js",
     "config": "config/index.js",
-    "@api/controllers/log": "src/api/controllers/log.controller.js",
-    "routes/log": "routes/log.route.js",
-    "@api/services/boot": "src/api/services/boot.js",
-    "@database/migrations": "src/database/migations/",
-    "@database/connection": "src/database/connection.js"
+    "@api/controllers/users": "src/api/controllers/users.controller.js",
+    "routes/users": "routes/users.route.js",
+    "@api/services/boot": "src/api/services/boot-service.js",
+    "@api/services/users": "src/api/services/users.service.js",
+    "@database/connection": "src/database/connection.js",
+    "@api/models/users": "src/api/models/users.model.js"
   }
 }
