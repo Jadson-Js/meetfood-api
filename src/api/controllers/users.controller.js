@@ -4,24 +4,31 @@ const usersController = {
     helloWorld(req, res) {
         res.send('Hello world!')
     },
-    
-    async getUsers (req, res) { 
-        try {
-          const users = await usersService.getUsers();
 
-          return res.status(200).json(users);
+    async getUser(req, res) {
+        const userId = req.params.id
+        
+        try {
+            const data = await usersService.getUser(userId)
+
+            res.status(200).json(data)
         } catch (err) {
-          return res.status(400).json(err);
+            res.status(400).json(sendError)
         }
     },
 
-    async createUser (req, res) {
-        try {
-            await usersService.createUser ();
+    async createUser(req, res) {
+        const newUser = {
+            email: req.body.email,
+            password: req.body.password
+        }
 
-            return res.status(200).send('User created');
+        try {
+            await usersService.createUser(newUser)
+
+            res.send('User created')
         } catch (err) {
-          return res.status(400).json(err);
+            res.status(400).json(err)
         }
     }
 }

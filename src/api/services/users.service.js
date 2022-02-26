@@ -1,17 +1,20 @@
 const usersModel = require('@api/models/users')
 
 const usersService = {
-    async getUsers() {
-        const users = await usersModel.findAll()
+    async getUser(userId) {
+        let data 
         
-        return users
+        if(userId) {
+            data = await usersModel.findByPk(userId)
+        } else {
+            data = await usersModel.findAll()
+        }
+
+        return data
     },
 
-    createUser() {
-        usersModel.create({
-            email: 'jadson20051965@gmail.com',
-            password: 'Powerranger123!'
-        })
+    async createUser(user) {
+        await usersModel.create({ email: user.email, password: user.password });
     }
 }
 

@@ -1,44 +1,41 @@
 {
   "name": "meetfood-api",
   "version": "1.0.0",
-  "description": "Api para o projeto web meetFood contendo todas as funcionalidades back-end.",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server.js",
-    "knex": "npx knex migrate:latest --knexfile knexfile.js migrate:latest"
+    "start": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jadson-Js/meetfood-api.git"
   },
-  "author": "Jadson-Js",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Jadson-Js/meetfood-api"
   },
   "homepage": "https://github.com/Jadson-Js/meetfood-api#readme",
   "dependencies": {
+    "body-parser": "^1.19.2",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "module-alias": "^2.2.2",
-    "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.16.2",
-    "sqlite3": "^5.0.2"
-  },
-  "devDependencies": {
-    "sequelize-cli": "^6.4.1"
+    "sequelize": "^6.17.0"
   },
   "_moduleAliases": {
     "@": "src",
     "@app": "src/app.js",
-    "config": "config/index.js",
+    "config": "config/config.js",
     "@api/controllers/users": "src/api/controllers/users.controller.js",
     "routes/users": "routes/users.route.js",
-    "@api/services/boot": "src/api/services/boot-service.js",
+    "@api/services/boot": "src/api/services/boot.service.js",
     "@api/services/users": "src/api/services/users.service.js",
     "@database/connection": "src/database/connection.js",
-    "@api/models/users": "src/api/models/users.model.js"
+    "@api/models/users": "src/api/models/users.model.js",
+    "utils/constants": "utils/constants.js"
   }
 }

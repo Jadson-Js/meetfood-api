@@ -1,7 +1,11 @@
 const express = require('express')
-const usersRoute = require('routes/users')
-
 const app = express()
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+const usersRoute = require('routes/users')
 
 app.use('/', usersRoute)
 
