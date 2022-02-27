@@ -1,17 +1,16 @@
-const { validationResult } = require('express-validator');
 const usersService = require('@api/services/users')
 const constants = require('utils/constants')
 
 const usersController = {
     helloWorld(req, res) {
-        res.sendError('Error no banco de dados :(', 500)
+        res.send('Hello world, bitch!')
     },
 
     async getUser(req, res) {
-        const userId = req.params.id
+        const id = req.params.id
         
         try {
-            const data = await usersService.getUser(userId)
+            const data = await usersService.getUserById(id)
 
             if (!data) {
                 res.sendError(constants.userNotFound, 404)
@@ -21,6 +20,7 @@ const usersController = {
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
         }
+        
     },
 
     async createUser(req, res) {
@@ -30,11 +30,17 @@ const usersController = {
         }
 
         try {
-            await usersService.createUser(newUser)
+            let emailAlreadyExist = await usersService.getUserByEmail(newUser.email)
 
-            res.send('User created')
+            if (emailAlreadyExist != undefined) {
+                res.sendError(constants.emailAlreadyExist, 400)
+            } else {
+                await usersService.createUser(newUser)
+
+                res.send('User created')
+            }
         } catch (err) {
-            res.status(400).json(err)
+            res.sendError(constants.somethingGoesWrong, 500)
         }
     }
 }

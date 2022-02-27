@@ -1,16 +1,16 @@
 const usersModel = require('@api/models/users')
 
 const usersService = {
-    async getUser(userId) {
-        let data 
+    async getUserById(id) {
+        let user = await usersModel.findByPk(id) 
         
-        if(userId) {
-            data = await usersModel.findByPk(userId)
-        } else {
-            data = await usersModel.findAll()
-        }
+        return user
+    },
 
-        return data
+    async getUserByEmail(email) {
+        let user = await usersModel.findOne({where: {email: email}})
+        
+        return user
     },
 
     async createUser(user) {

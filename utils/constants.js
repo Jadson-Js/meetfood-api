@@ -3,15 +3,11 @@
 const msgUser = {
     invalidName: "Invalid name",
     invalidEmail: "Invalid email",
-    invalidPassword: "invalid email or password",
-    userAlreadyExist: "User already exist",
-    somethingGoesWrong: "Something goes wrong",
+    invalidPassword: "invalid password",
+    invalidId: "Invalid id",
+    emailAlreadyExist: "Email already exist",
     userNotFound: "User not found",
-    invalidCredentials: "Invalid email or password",
-    tokenMissing: "Token is missing",
-    refreshTokenMissing: "Refresh token is missing",
-    tokenInvalid: "Token invalid",
-    invalidRefreshToken: "Invalid refresh token",
+    somethingGoesWrong: "Something goes wrong",
 }
 
 module.exports = msgUser
