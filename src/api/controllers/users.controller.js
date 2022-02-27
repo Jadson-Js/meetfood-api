@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const usersService = require('@api/services/users')
 const constants = require('utils/constants')
 
@@ -7,6 +8,11 @@ const usersController = {
     },
 
     async getUser(req, res) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
+        }
+
         const userId = req.params.id
         
         try {
@@ -18,7 +24,7 @@ const usersController = {
 
             res.status(200).json(data)
         } catch (err) {
-            res.sendError(somethingGoesWrong, 500)
+            res.sendError(constants.somethingGoesWrong, 500)
         }
     },
 
