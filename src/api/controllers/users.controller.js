@@ -8,11 +8,6 @@ const usersController = {
     },
 
     async getUser(req, res) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-          return res.status(400).json({ errors: errors.array() });
-        }
-
         const userId = req.params.id
         
         try {

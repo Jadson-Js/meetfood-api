@@ -40,6 +40,7 @@
     "@api/models/users": "src/api/models/users.model.js",
     "utils/constants": "utils/constants.js",
     "helpers/sendErrors": "helpers/sendErrors.js",
-    "@api/services/logger": "src/api/services/logger.service.js"
+    "@api/services/logger": "src/api/services/logger.service.js",
+    "helpers/validResult": "helpers/validResult.js"
   }
 }
