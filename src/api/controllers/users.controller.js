@@ -1,8 +1,9 @@
 const usersService = require('@api/services/users')
+const constants = require('utils/constants')
 
 const usersController = {
     helloWorld(req, res) {
-        res.send('Hello world!')
+        res.sendError('Error no banco de dados :(', 500)
     },
 
     async getUser(req, res) {
@@ -11,9 +12,13 @@ const usersController = {
         try {
             const data = await usersService.getUser(userId)
 
+            if (!data) {
+                res.sendError(constants.userNotFound, 404)
+            }
+
             res.status(200).json(data)
         } catch (err) {
-            res.status(400).json(sendError)
+            res.sendError(somethingGoesWrong, 500)
         }
     },
 

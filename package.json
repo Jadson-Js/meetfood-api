@@ -24,7 +24,8 @@
     "express": "^4.17.3",
     "module-alias": "^2.2.2",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.17.0"
+    "sequelize": "^6.17.0",
+    "winston": "^3.6.0"
   },
   "_moduleAliases": {
     "@": "src",
@@ -36,6 +37,8 @@
     "@api/services/users": "src/api/services/users.service.js",
     "@database/connection": "src/database/connection.js",
     "@api/models/users": "src/api/models/users.model.js",
-    "utils/constants": "utils/constants.js"
+    "utils/constants": "utils/constants.js",
+    "helpers/sendErrors": "helpers/sendErrors.js",
+    "@api/services/logger": "src/api/services/logger.service.js"
   }
 }
