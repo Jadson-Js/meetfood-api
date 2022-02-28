@@ -2,21 +2,21 @@ const router = require('express').Router()
 const { check } = require('express-validator');
 
 const validResult = require('@helpers/validResult')
-const usersController = require('@controllers/user')
+const userControllers = require('@controllers/user')
 const constants = require('@utils/constants')
 
 router.get('/', 
-    usersController.helloWorld
+    userControllers.helloWorld
 )
 
 router.get('/users', 
-    usersController.getUsers
+    userControllers.getUsers
 )
 
 router.get('/user/:id',
     check('id').isNumeric().withMessage(constants.invalidId),
     validResult,
-    usersController.getUser
+    userControllers.getUser
 )
 
 router.post('/user', 
@@ -24,13 +24,13 @@ router.post('/user',
     check('email').isLength({ min: 1, max: 256 }).isEmail().normalizeEmail().withMessage(constants.invalidEmail), 
     check('password').isLength({ min: 8, max: 160 }).withMessage(constants.invalidPassword),
     validResult,
-    usersController.createUser
+    userControllers.createUser
 )
 
 router.delete('/user/:id',
     check('id').isNumeric().withMessage(constants.invalidId),
     validResult,
-    usersController.deleteUser
+    userControllers.deleteUser
 )
 
 module.exports = router

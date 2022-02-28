@@ -1,7 +1,7 @@
 const userService = require('@services/user')
 const constants = require('@utils/constants')
 
-const usersController = {
+const userControllers = {
     helloWorld(req, res) {
         res.send('Hello world, bitch!')
     },
@@ -87,4 +87,4 @@ const usersController = {
     }
 }
 
-module.exports = usersController
+module.exports = userControllers
