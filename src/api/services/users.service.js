@@ -1,5 +1,5 @@
-const usersModel = require('@api/models/users')
-const logUtils = require('utils/log')
+const usersModel = require('@models/users')
+const logUtils = require('@utils/log')
 
 const usersService = {
     async getUsers () {
@@ -25,7 +25,7 @@ const usersService = {
     async createUser(user) {
         const hash = logUtils.encrypt(user.password)
 
-        await usersModel.create({ email: user.email, password: hash });
+        return await usersModel.create({ email: user.email, password: hash });
     },
 
     async deleteUserById(id) {

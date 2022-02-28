@@ -1,4 +1,4 @@
-const logger = require('@api/services/logger')
+const logger = require('@services/logger')
 
 module.exports = (req, res, next) => {
     res.sendError = function (message, status=500) {

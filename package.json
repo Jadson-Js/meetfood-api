@@ -32,17 +32,17 @@
   "_moduleAliases": {
     "@": "src",
     "@app": "src/app.js",
-    "config": "config/config.js",
-    "@api/controllers/users": "src/api/controllers/users.controller.js",
-    "routes/users": "routes/users.route.js",
-    "@api/services/boot": "src/api/services/boot.service.js",
-    "@api/services/users": "src/api/services/users.service.js",
+    "@config": "config/config.js",
     "@database/connection": "src/database/connection.js",
-    "@api/models/users": "src/api/models/users.model.js",
-    "utils/constants": "utils/constants.js",
-    "helpers/sendErrors": "helpers/sendErrors.js",
-    "@api/services/logger": "src/api/services/logger.service.js",
-    "helpers/validResult": "helpers/validResult.js",
-    "utils/log": "utils/log.utils.js"
+    "@helpers/sendErrors": "helpers/sendErrors.js",
+    "@helpers/validResult": "helpers/validResult.js",
+    "@routes/users": "routes/users.route.js",
+    "@controllers/users": "src/api/controllers/users.controller.js",
+    "@services/users": "src/api/services/users.service.js",
+    "@services/logger": "src/api/services/logger.service.js",
+    "@services/boot": "src/api/services/boot.service.js",
+    "@models/users": "src/api/models/users.model.js",
+    "@utils/log": "utils/log.utils.js",
+    "@utils/constants": "utils/constants.js"
   }
 }

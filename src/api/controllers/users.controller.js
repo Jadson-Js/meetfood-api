@@ -1,5 +1,5 @@
-const usersService = require('@api/services/users')
-const constants = require('utils/constants')
+const usersService = require('@services/users')
+const constants = require('@utils/constants')
 
 const usersController = {
     helloWorld(req, res) {
@@ -27,8 +27,6 @@ const usersController = {
             } else {
                 res.status(200).json(user)
             }
-
-            
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
         }
@@ -47,9 +45,15 @@ const usersController = {
             if (emailAlreadyExist != undefined) {
                 res.sendError(constants.emailAlreadyExist, 400)
             } else {
-                await usersService.createUser(newUser)
+                const userCreated = await usersService.createUser(newUser)
 
-                res.send('User created')
+                res.json({
+                    User: {
+                        id: userCreated.id,
+                        email: userCreated.email,
+                        status: 'Created'
+                    }
+                })
             }
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)

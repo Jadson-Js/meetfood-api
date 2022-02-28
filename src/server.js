@@ -2,7 +2,7 @@ require('dotenv').config()
 require('module-alias/register')
 
 
-const boot = require('@api/services/boot')
+const boot = require('@services/boot')
 const connection = require('@database/connection')
 
 boot()

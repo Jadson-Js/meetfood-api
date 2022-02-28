@@ -1,4 +1,4 @@
-const config = require('config')
+const config = require('@config')
 const sequelize = require('sequelize')
 
 const connection = new sequelize(config.development.database, config.development.username, config.development.password, {
