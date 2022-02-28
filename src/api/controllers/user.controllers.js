@@ -1,4 +1,4 @@
-const usersService = require('@services/users')
+const userService = require('@services/user')
 const constants = require('@utils/constants')
 
 const usersController = {
@@ -8,7 +8,7 @@ const usersController = {
 
     async getUsers(req, res) {
         try {
-            const users = await usersService.getUsers()
+            const users = await userService.getUsers()
 
             res.status(200).json(users)
         } catch (err) {
@@ -20,7 +20,7 @@ const usersController = {
         const id = req.params.id
 
         try {
-            const user = await usersService.getUserById(id)
+            const user = await userService.getUserById(id)
 
             if (!user) {
                 res.sendError(constants.userNotFound, 404)
@@ -41,12 +41,12 @@ const usersController = {
         }
 
         try {
-            let emailAlreadyExist = await usersService.getUserByEmail(newUser.email)
+            let emailAlreadyExist = await userService.getUserByEmail(newUser.email)
 
             if (emailAlreadyExist != undefined) {
                 res.sendError(constants.emailAlreadyExist, 400)
             } else {
-                const userCreated = await usersService.createUser(newUser)
+                const userCreated = await userService.createUser(newUser)
 
                 res.json({
                     User: {
@@ -65,12 +65,12 @@ const usersController = {
         const id = req.params.id
 
         try {
-            let idExists = await usersService.getUserById(id)
+            let idExists = await userService.getUserById(id)
 
             if (!idExists) {
                 res.sendError(constants.userNotFound, 404)
             } else {
-                await usersService.deleteUserById(id)
+                await userService.deleteUserById(id)
 
                 res.json({
                     User: {

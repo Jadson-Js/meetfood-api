@@ -1,13 +1,15 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+
 const sendError = require('@helpers/sendErrors')
-const usersRoute = require('@routes/users')
+
+const userRoutes = require('@routes/user')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(sendError)
 
-app.use('/', usersRoute)
+app.use('/', userRoutes)
 
 module.exports = app

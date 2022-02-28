@@ -1,21 +1,21 @@
-const usersModel = require('@models/users')
+const userModel = require('@models/user')
 const logUtils = require('@utils/log')
 
 const usersService = {
     async getUsers () {
-        let user = await usersModel.findAll() 
+        let user = await userModel.findAll() 
         
         return user
     },
 
     async getUserById(id) {
-        let user = await usersModel.findByPk(id) 
+        let user = await userModel.findByPk(id) 
         
         return user
     },
 
     async getUserByEmail(email) {
-        let user = await usersModel.findOne({
+        let user = await userModel.findOne({
             where: {email: email}
         })
         
@@ -25,11 +25,11 @@ const usersService = {
     async createUser(user) {
         const hash = logUtils.encrypt(user.password)
 
-        return await usersModel.create({ name: user.name, email: user.email, password: hash });
+        return await userModel.create({ name: user.name, email: user.email, password: hash });
     },
 
     async deleteUserById(id) {
-        await usersModel.destroy({
+        await userModel.destroy({
             where: { id: id }
         })
     }

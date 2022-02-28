@@ -36,13 +36,13 @@
     "@database/connection": "src/database/connection.js",
     "@helpers/sendErrors": "helpers/sendErrors.js",
     "@helpers/validResult": "helpers/validResult.js",
-    "@routes/users": "routes/users.route.js",
-    "@controllers/users": "src/api/controllers/users.controller.js",
-    "@services/users": "src/api/services/users.service.js",
+    "@utils/log": "utils/log.utils.js",
+    "@utils/constants": "utils/constants.js",
+    "@routes/user": "routes/user.routes.js",
+    "@controllers/user": "src/api/controllers/user.controllers.js",
+    "@services/user": "src/api/services/user.service.js",
     "@services/logger": "src/api/services/logger.service.js",
     "@services/boot": "src/api/services/boot.service.js",
-    "@models/users": "src/api/models/users.model.js",
-    "@utils/log": "utils/log.utils.js",
-    "@utils/constants": "utils/constants.js"
+    "@models/user": "src/api/models/user.model.js"
   }
 }

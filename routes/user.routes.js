@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { check } = require('express-validator');
 
 const validResult = require('@helpers/validResult')
-const usersController = require('@controllers/users')
+const usersController = require('@controllers/user')
 const constants = require('@utils/constants')
 
 router.get('/', 
