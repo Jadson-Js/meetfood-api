@@ -25,7 +25,7 @@ const usersService = {
     async createUser(user) {
         const hash = logUtils.encrypt(user.password)
 
-        return await usersModel.create({ email: user.email, password: hash });
+        return await usersModel.create({ name: user.name, email: user.email, password: hash });
     },
 
     async deleteUserById(id) {

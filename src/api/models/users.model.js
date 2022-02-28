@@ -9,6 +9,13 @@ const Users = connection.define('users', {
         allowNull: false,
         primaryKey: true
     },
+    name: {
+        type: Sequelize.STRING,
+        unique: false,
+        autoIncrement: false,
+        allowNull: false,
+        primaryKey: false
+    },
     email: {
         type: Sequelize.STRING,
         unique: true,

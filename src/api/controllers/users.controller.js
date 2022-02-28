@@ -35,6 +35,7 @@ const usersController = {
 
     async createUser(req, res) {
         const newUser = {
+            name: req.body.name,
             email: req.body.email,
             password: req.body.password
         }

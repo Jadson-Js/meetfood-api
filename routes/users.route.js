@@ -20,7 +20,8 @@ router.get('/user/:id',
 )
 
 router.post('/user', 
-    check('email').isEmail().normalizeEmail().withMessage(constants.invalidEmail), 
+    check('name').isLength({ min: 1, max: 32 }).isString().withMessage(constants.invalidName),
+    check('email').isLength({ min: 1, max: 256 }).isEmail().normalizeEmail().withMessage(constants.invalidEmail), 
     check('password').isLength({ min: 8, max: 160 }).withMessage(constants.invalidPassword),
     validResult,
     usersController.createUser
