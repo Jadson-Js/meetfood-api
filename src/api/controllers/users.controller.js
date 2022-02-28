@@ -9,7 +9,7 @@ const usersController = {
     async getUsers(req, res) {
         try {
             const users = await usersService.getUsers()
-            
+
             res.status(200).json(users)
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
@@ -24,9 +24,11 @@ const usersController = {
 
             if (!user) {
                 res.sendError(constants.userNotFound, 404)
+            } else {
+                res.status(200).json(user)
             }
 
-            res.status(200).json(user)
+            
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
         }
@@ -49,6 +51,31 @@ const usersController = {
 
                 res.send('User created')
             }
+        } catch (err) {
+            res.sendError(constants.somethingGoesWrong, 500)
+        }
+    },
+
+    async deleteUser(req, res) {
+        const id = req.params.id
+
+        try {
+            let idExists = await usersService.getUserById(id)
+
+            if (!idExists) {
+                res.sendError(constants.userNotFound, 404)
+            } else {
+                await usersService.deleteUserById(id)
+
+                res.json({
+                    User: {
+                        id: idExists.id,
+                        email: idExists.email,
+                        status: 'Deleted'
+                    }
+                })
+            }
+
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
         }

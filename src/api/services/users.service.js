@@ -15,7 +15,9 @@ const usersService = {
     },
 
     async getUserByEmail(email) {
-        let user = await usersModel.findOne({where: {email: email}})
+        let user = await usersModel.findOne({
+            where: {email: email}
+        })
         
         return user
     },
@@ -24,6 +26,12 @@ const usersService = {
         const hash = logUtils.encrypt(user.password)
 
         await usersModel.create({ email: user.email, password: hash });
+    },
+
+    async deleteUserById(id) {
+        await usersModel.destroy({
+            where: { id: id }
+        })
     }
 }
 
