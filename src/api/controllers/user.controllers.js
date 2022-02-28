@@ -10,7 +10,10 @@ const userControllers = {
         try {
             const users = await userService.getUsers()
 
-            res.status(200).json(users)
+            res.status(200).json({
+                status: 200,
+                data: users
+            })
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
         }
@@ -25,7 +28,10 @@ const userControllers = {
             if (!user) {
                 res.sendError(constants.userNotFound, 404)
             } else {
-                res.status(200).json(user)
+                res.status(200).json({
+                    status: 200,
+                    data: user
+                })
             }
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
@@ -48,12 +54,9 @@ const userControllers = {
             } else {
                 const userCreated = await userService.createUser(newUser)
 
-                res.json({
-                    User: {
-                        id: userCreated.id,
-                        email: userCreated.email,
-                        status: 'Created'
-                    }
+                res.status(200).json({
+                    status: 200,
+                    success: true
                 })
             }
         } catch (err) {
@@ -72,12 +75,9 @@ const userControllers = {
             } else {
                 await userService.deleteUserById(id)
 
-                res.json({
-                    User: {
-                        id: idExists.id,
-                        email: idExists.email,
-                        status: 'Deleted'
-                    }
+                res.status(200).json({
+                    status: 200,
+                    success: true
                 })
             }
 
