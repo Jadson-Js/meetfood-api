@@ -7,6 +7,7 @@ const msgUser = {
     invalidId: "Invalid id",
     emailAlreadyExist: "Email already exist",
     userNotFound: "User not found",
+    invalidCredentials: "Name or password are incorrect",
     somethingGoesWrong: "Something goes wrong",
 }
 

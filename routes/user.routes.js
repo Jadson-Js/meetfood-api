@@ -9,6 +9,12 @@ router.get('/',
     userControllers.helloWorld
 )
 
+router.post('/login', 
+    check('name').isLength({ min: 1, max: 32 }).isString().withMessage(constants.invalidName),
+    check('password').isLength({ min: 8, max: 160 }).withMessage(constants.invalidPassword),
+    userControllers.authUser
+)
+
 router.get('/users', 
     userControllers.getUsers
 )

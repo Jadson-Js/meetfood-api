@@ -28,5 +28,8 @@ module.exports = {
     },
     app: {
         port: process.env.APP_PORT
+    },
+    jwt: {
+        secret: process.env.JWT_SECRET
     }
 };
