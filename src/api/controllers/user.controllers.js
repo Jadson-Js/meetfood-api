@@ -63,7 +63,7 @@ const userControllers = {
                     const userId = userFound.id
 
                     const token = await jwt.sign({ userId }, config.jwt.secret, {
-                        expiresIn: 300 // expires in 5min
+                        expiresIn: 1000 * 60 * 24 // expires in 5min
                     });
 
                     res.status(200).json({

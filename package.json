@@ -39,6 +39,7 @@
     "@helpers/validResult": "helpers/validResult.js",
     "@utils/log": "utils/log.utils.js",
     "@utils/constants": "utils/constants.js",
+    "@middleware/verifyToken": "src/api/middlewares/verifyJwt.js",
     "@routes/user": "routes/user.routes.js",
     "@controllers/user": "src/api/controllers/user.controllers.js",
     "@services/user": "src/api/services/user.service.js",

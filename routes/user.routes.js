@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const { check } = require('express-validator');
 
+const verifyToken = require('@middleware/verifyToken')
+
 const validResult = require('@helpers/validResult')
 const userControllers = require('@controllers/user')
 const constants = require('@utils/constants')
@@ -16,6 +18,7 @@ router.post('/login',
 )
 
 router.get('/users', 
+    verifyToken,
     userControllers.getUsers
 )
 
