@@ -23,19 +23,22 @@ const userControllers = {
             } else {
 
                 const validUser = await userService.verifyPassword(user.password, userFound.password)
-            
+
                 if (!validUser) {
                     res.sendError(constants.invalidCredentials, 403)
                 } else {
                     const userId = userFound.id
 
-                    const token = await jwt.sign({ userId }, config.jwt.secret, {
+                    const token = await jwt.sign({
+                        userId
+                    }, config.jwt.secret, {
                         expiresIn: 1000 * 60 * 24 // 24 horas
                     });
 
                     res.status(200).json({
                         status: 200,
                         auth: true,
+                        user: userFound,
                         token: token
                     })
                 }
@@ -49,23 +52,25 @@ const userControllers = {
         const id = req.params.id
 
         if (id != req.loggedUser.userId) {
-            res.sendError(constants.userNotFound, 403)
-        } else {
-            try {
-                const user = await userService.getUserById(id)
-    
-                if (!user) {
-                    res.sendError(constants.userNotFound, 404)
-                } else {
-                    res.status(200).json({
-                        status: 200,
-                        data: user
-                    })
-                }
-            } catch (err) {
-                res.sendError(constants.somethingGoesWrong, 500)
-            }
+            res.sendError(constants.AccessDenied, 403)
+            return
         }
+
+        try {
+            const user = await userService.getUserById(id)
+
+            if (!user) {
+                res.sendError(constants.userNotFound, 404)
+            } else {
+                res.status(200).json({
+                    status: 200,
+                    data: user
+                })
+            }
+        } catch (err) {
+            res.sendError(constants.somethingGoesWrong, 500)
+        }
+
     },
 
     async getUsers(req, res) {
