@@ -31,7 +31,7 @@ const usersService = {
         return user
     },
 
-    async validData (password, passwordFound) {
+    async verifyPassword (password, passwordFound) {
         const passwordIsSame = await bcrypt.compare(password, passwordFound)
         
         return passwordIsSame

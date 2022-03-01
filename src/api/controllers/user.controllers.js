@@ -9,24 +9,63 @@ const userControllers = {
         res.send('Hello world, bitch!')
     },
 
-    async getUser(req, res) {
-        const id = req.params.id
+    async loginUser(req, res) {
+        const user = {
+            email: req.body.email,
+            password: req.body.password
+        }
 
         try {
-            const user = await userService.getUserById(id)
+            const userFound = await userService.getUserByEmail(user.email)
 
-            if (!user) {
+            if (!userFound) {
                 res.sendError(constants.userNotFound, 404)
             } else {
-                res.status(200).json({
-                    status: 200,
-                    data: user
-                })
+
+                const validUser = await userService.verifyPassword(user.password, userFound.password)
+            
+                if (!validUser) {
+                    res.sendError(constants.invalidCredentials, 403)
+                } else {
+                    const userId = userFound.id
+
+                    const token = await jwt.sign({ userId }, config.jwt.secret, {
+                        expiresIn: 1000 * 60 * 24 // 24 horas
+                    });
+
+                    res.status(200).json({
+                        status: 200,
+                        auth: true,
+                        token: token
+                    })
+                }
             }
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
         }
+    },
 
+    async getUser(req, res) {
+        const id = req.params.id
+
+        if (id != req.loggedUser.userId) {
+            res.sendError(constants.userNotFound, 403)
+        } else {
+            try {
+                const user = await userService.getUserById(id)
+    
+                if (!user) {
+                    res.sendError(constants.userNotFound, 404)
+                } else {
+                    res.status(200).json({
+                        status: 200,
+                        data: user
+                    })
+                }
+            } catch (err) {
+                res.sendError(constants.somethingGoesWrong, 500)
+            }
+        }
     },
 
     async getUsers(req, res) {
@@ -37,42 +76,6 @@ const userControllers = {
                 status: 200,
                 data: users
             })
-        } catch (err) {
-            res.sendError(constants.somethingGoesWrong, 500)
-        }
-    },
-
-    async authUser(req, res) {
-        const user = {
-            name: req.body.name,
-            password: req.body.password
-        }
-
-        try {
-            const userFound = await userService.getUserByName(user.name)
-
-            if (!userFound) {
-                res.sendError(constants.userNotFound, 404)
-            } else {
-
-                const validUser = await userService.validData(user.password, userFound.password)
-            
-                if (!validUser) {
-                    res.sendError(constants.invalidCredentials, 403)
-                } else {
-                    const userId = userFound.id
-
-                    const token = await jwt.sign({ userId }, config.jwt.secret, {
-                        expiresIn: 1000 * 60 * 24 // expires in 5min
-                    });
-
-                    res.status(200).json({
-                        status: 200,
-                        auth: true,
-                        token: token
-                    })
-                }
-            }
         } catch (err) {
             res.sendError(constants.somethingGoesWrong, 500)
         }

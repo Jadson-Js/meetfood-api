@@ -7,22 +7,22 @@ const validResult = require('@helpers/validResult')
 const userControllers = require('@controllers/user')
 const constants = require('@utils/constants')
 
+router.post('/login', 
+    check('email').isLength({ min: 1, max: 256 }).isEmail().normalizeEmail().withMessage(constants.invalidEmail), 
+    check('password').isLength({ min: 8, max: 160 }).withMessage(constants.invalidPassword),
+    userControllers.loginUser
+)
+
 router.get('/', 
     userControllers.helloWorld
 )
 
-router.post('/login', 
-    check('name').isLength({ min: 1, max: 32 }).isString().withMessage(constants.invalidName),
-    check('password').isLength({ min: 8, max: 160 }).withMessage(constants.invalidPassword),
-    userControllers.authUser
-)
-
 router.get('/users', 
-    verifyToken,
     userControllers.getUsers
 )
 
 router.get('/user/:id',
+    verifyToken,
     check('id').isNumeric().withMessage(constants.invalidId),
     validResult,
     userControllers.getUser
@@ -37,6 +37,7 @@ router.post('/user',
 )
 
 router.delete('/user/:id',
+    verifyToken,
     check('id').isNumeric().withMessage(constants.invalidId),
     validResult,
     userControllers.deleteUser

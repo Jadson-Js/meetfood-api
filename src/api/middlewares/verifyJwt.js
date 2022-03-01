@@ -12,7 +12,7 @@ function verifyJwt (req, res, next) {
                 res.sendError(constants.tokenUnauthentic, 401)
             } else {
                 req.token = token
-                req.loggedUser = data.userId
+                req.loggedUser = data
 
                 next()
             }
