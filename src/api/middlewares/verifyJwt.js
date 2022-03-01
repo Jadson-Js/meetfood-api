@@ -14,9 +14,6 @@ function verifyJwt(req, res, next) {
         if (err) {
             res.sendError(constants.tokenUnauthentic, 401)
         } else {
-            req.token = token
-            req.loggedUser = data
-
             next()
         }
     })

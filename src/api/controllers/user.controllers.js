@@ -1,12 +1,17 @@
-const jwt = require('jsonwebtoken');
-
 const userService = require('@services/user')
+const tokenService = require('@services/token')
 const constants = require('@utils/constants')
-const config = require('@config')
 
 const userControllers = {
     helloWorld(req, res) {
         res.send('Hello world, bitch!')
+    },
+
+    async getSession(req, res) {
+        res.status(200).json({
+            status: 200,
+            data: req.session
+        })
     },
 
     async loginUser(req, res) {
@@ -27,14 +32,13 @@ const userControllers = {
                 if (!validUser) {
                     res.sendError(constants.invalidCredentials, 403)
                 } else {
-                    const userId = userFound.id
+                    const {id, email} = userFound
 
-                    const token = await jwt.sign({
-                        userId
-                    }, config.jwt.secret, {
-                        expiresIn: 1000 * 60 * 24 // 24 horas
-                    });
+                    const token = await tokenService.createToken(id, email)
 
+                    req.session.loggedUser = userFound
+                    req.session.token = token
+                    
                     res.status(200).json({
                         status: 200,
                         auth: true,
@@ -51,7 +55,7 @@ const userControllers = {
     async getUser(req, res) {
         const id = req.params.id
 
-        if (id != req.loggedUser.userId) {
+        if (id != req.session.loggedUser.id) {
             res.sendError(constants.AccessDenied, 403)
             return
         }

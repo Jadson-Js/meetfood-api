@@ -1,7 +1,6 @@
 require('dotenv').config()
 require('module-alias/register')
 
-
 const boot = require('@services/boot')
 const connection = require('@database/connection')
 

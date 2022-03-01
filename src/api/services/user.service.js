@@ -38,11 +38,9 @@ const usersService = {
     },
 
     async createUser(user) {
-        console.log('uip')
         const saltRounds = 10
         const salt = bcrypt.genSaltSync(saltRounds)
         const hash = bcrypt.hashSync(user.password, salt)
-        console.log(hash)
 
         return await userModel.create({ name: user.name, email: user.email, password: hash });
     },

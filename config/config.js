@@ -31,5 +31,8 @@ module.exports = {
     },
     jwt: {
         secret: process.env.JWT_SECRET
+    },
+    session: {
+        secret: process.env.SESSION_SECRET
     }
 };
