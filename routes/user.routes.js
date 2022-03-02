@@ -7,20 +7,6 @@ const validResult = require('@helpers/validResult')
 const userControllers = require('@controllers/user')
 const constants = require('@utils/constants')
 
-router.get('/', 
-    userControllers.helloWorld
-)
-
-router.get('/session',
-    userControllers.getSession
-)
-
-router.post('/login', 
-    check('email').isLength({ min: 1, max: 256 }).isEmail().normalizeEmail().withMessage(constants.invalidEmail), 
-    check('password').isLength({ min: 8, max: 160 }).withMessage(constants.invalidPassword),
-    userControllers.loginUser
-)
-
 router.get('/users', 
     userControllers.getUsers
 )

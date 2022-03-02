@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs')
-
 const userModel = require('@models/user')
 
 const usersService = {
@@ -29,12 +28,6 @@ const usersService = {
         })
         
         return user
-    },
-
-    async verifyPassword (password, passwordFound) {
-        const passwordIsSame = await bcrypt.compare(password, passwordFound)
-        
-        return passwordIsSame
     },
 
     async createUser(user) {

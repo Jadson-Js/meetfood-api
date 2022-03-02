@@ -3,11 +3,13 @@ const app = express()
 const bodyParser = require('body-parser')
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
+
 const config = require('@config')
 
 const sendError = require('@helpers/sendErrors')
 
 const userRoutes = require('@routes/user')
+const loginRoutes = require('@routes/login')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -21,6 +23,7 @@ app.use(sessions({
 app.use(sendError)
 
 app.use('/', userRoutes)
+app.use('/', loginRoutes)
 
 module.exports = app
 

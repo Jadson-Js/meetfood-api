@@ -1,59 +1,14 @@
 const userService = require('@services/user')
-const tokenService = require('@services/token')
 const constants = require('@utils/constants')
 
 const userControllers = {
-    helloWorld(req, res) {
-        res.send('Hello world, bitch!')
-    },
-
-    async getSession(req, res) {
-        res.status(200).json({
-            status: 200,
-            data: req.session
-        })
-    },
-
-    async loginUser(req, res) {
-        const user = {
-            email: req.body.email,
-            password: req.body.password
-        }
-
-        try {
-            const userFound = await userService.getUserByEmail(user.email)
-
-            if (!userFound) {
-                res.sendError(constants.userNotFound, 404)
-            } else {
-
-                const validUser = await userService.verifyPassword(user.password, userFound.password)
-
-                if (!validUser) {
-                    res.sendError(constants.invalidCredentials, 403)
-                } else {
-                    const {id, email} = userFound
-
-                    const token = await tokenService.createToken(id, email)
-
-                    req.session.loggedUser = userFound
-                    req.session.token = token
-                    
-                    res.status(200).json({
-                        status: 200,
-                        auth: true,
-                        user: userFound,
-                        token: token
-                    })
-                }
-            }
-        } catch (err) {
-            res.sendError(constants.somethingGoesWrong, 500)
-        }
-    },
-
     async getUser(req, res) {
         const id = req.params.id
+
+        if (req.session.loggedUser == undefined) {
+            res.sendError(constants.requiredLogged, 401)
+            return
+        }
 
         if (id != req.session.loggedUser.id) {
             res.sendError(constants.AccessDenied, 403)

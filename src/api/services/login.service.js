@@ -1,7 +1,14 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs')
 const config = require('@config')
 
-const tokenService = {
+const loginService = {
+    async verifyPassword (password, passwordFound) {
+        const passwordIsSame = await bcrypt.compare(password, passwordFound)
+        
+        return passwordIsSame
+    },
+
     async createToken(id, email) {
         const token = await jwt.sign({ id, email }, config.jwt.secret, {
             expiresIn: 864000 // 24 horas
@@ -11,4 +18,5 @@ const tokenService = {
     }
 }
 
-module.exports = tokenService
+
+module.exports = loginService
