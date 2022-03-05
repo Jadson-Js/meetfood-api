@@ -26,7 +26,3 @@ app.use('/', userRoutes)
 app.use('/', loginRoutes)
 
 module.exports = app
-
-
-
-

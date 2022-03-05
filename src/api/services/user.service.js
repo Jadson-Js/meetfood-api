@@ -1,21 +1,21 @@
 const bcrypt = require('bcryptjs')
-const userModel = require('@models/user')
+const {User, Role} = require('@models')
 
 const usersService = {
     async getUsers () {
-        let user = await userModel.findAll() 
+        let user = await User.findAll() 
         
         return user
     },
 
     async getUserById(id) {
-        let user = await userModel.findByPk(id) 
+        let user = await User.findByPk(id) 
         
         return user
     },
 
     async getUserByName(name) {
-        let user = await userModel.findOne({
+        let user = await User.findOne({
             where: {name: name}
         })
         
@@ -23,7 +23,7 @@ const usersService = {
     },
 
     async getUserByEmail(email) {
-        let user = await userModel.findOne({
+        let user = await User.findOne({
             where: {email: email}
         })
         
@@ -35,11 +35,11 @@ const usersService = {
         const salt = bcrypt.genSaltSync(saltRounds)
         const hash = bcrypt.hashSync(user.password, salt)
 
-        return await userModel.create({ name: user.name, email: user.email, password: hash });
+        return await User.create({ name: user.name, email: user.email, password: hash, RoleId: user.RoleId });
     },
 
     async deleteUserById(id) {
-        await userModel.destroy({
+        await User.destroy({
             where: { id: id }
         })
     }

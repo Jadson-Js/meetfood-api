@@ -1,6 +1,4 @@
-// User messages
-
-const msgUser = {
+const logUser = {
     invalidName: "Invalid name.",
     invalidEmail: "Invalid email.",
     invalidPassword: "invalid password.",
@@ -15,4 +13,8 @@ const msgUser = {
     somethingGoesWrong: "Something goes wrong.",
 }
 
-module.exports = msgUser
+const logRole = {
+    invalidRoleId: "Invalid role id.",
+}
+
+module.exports = {logUser, logRole}

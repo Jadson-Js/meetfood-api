@@ -1,17 +1,17 @@
 const userService = require('@services/user')
-const constants = require('@utils/constants')
+const { logUser } = require('@utils/constants')
 
 const userControllers = {
     async getUser(req, res) {
         const id = req.params.id
 
         if (req.session.loggedUser == undefined) {
-            res.sendError(constants.requiredLogged, 401)
+            res.sendError(logUser.requiredLogged, 401)
             return
         }
 
         if (id != req.session.loggedUser.id) {
-            res.sendError(constants.AccessDenied, 403)
+            res.sendError(logUser.AccessDenied, 403)
             return
         }
 
@@ -19,7 +19,7 @@ const userControllers = {
             const user = await userService.getUserById(id)
 
             if (!user) {
-                res.sendError(constants.userNotFound, 404)
+                res.sendError(logUser.userNotFound, 404)
             } else {
                 res.status(200).json({
                     status: 200,
@@ -27,7 +27,7 @@ const userControllers = {
                 })
             }
         } catch (err) {
-            res.sendError(constants.somethingGoesWrong, 500)
+            res.sendError(logUser.somethingGoesWrong, 500)
         }
 
     },
@@ -41,7 +41,7 @@ const userControllers = {
                 data: users
             })
         } catch (err) {
-            res.sendError(constants.somethingGoesWrong, 500)
+            res.sendError(logUser.somethingGoesWrong, 500)
         }
     },
 
@@ -56,7 +56,7 @@ const userControllers = {
             const emailAlreadyExist = await userService.getUserByEmail(user.email)
 
             if (emailAlreadyExist != undefined) {
-                res.sendError(constants.emailAlreadyExist, 400)
+                res.sendError(logUser.emailAlreadyExist, 400)
             } else {
                 await userService.createUser(user)
 
@@ -66,7 +66,7 @@ const userControllers = {
                 })
             }
         } catch (err) {
-            res.sendError(constants.somethingGoesWrong, 500)
+            res.sendError(logUser.somethingGoesWrong, 500)
         }
     },
 
@@ -77,7 +77,7 @@ const userControllers = {
             let idExists = await userService.getUserById(id)
 
             if (!idExists) {
-                res.sendError(constants.userNotFound, 404)
+                res.sendError(logUser.userNotFound, 404)
             } else {
                 await userService.deleteUserById(id)
 
@@ -88,7 +88,7 @@ const userControllers = {
             }
 
         } catch (err) {
-            res.sendError(constants.somethingGoesWrong, 500)
+            res.sendError(logUser.somethingGoesWrong, 500)
         }
     }
 }
