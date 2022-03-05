@@ -1,5 +1,6 @@
 const userService = require('@services/user')
-const { logUser } = require('@utils/constants')
+const roleService = require('@services/role')
+const { logDefault, logUser } = require('@utils/constants')
 
 const userControllers = {
     async getUser(req, res) {
@@ -27,7 +28,7 @@ const userControllers = {
                 })
             }
         } catch (err) {
-            res.sendError(logUser.somethingGoesWrong, 500)
+            res.sendError(logDefault.somethingGoesWrong, 500)
         }
 
     },
@@ -41,7 +42,7 @@ const userControllers = {
                 data: users
             })
         } catch (err) {
-            res.sendError(logUser.somethingGoesWrong, 500)
+            res.sendError(logDefault.somethingGoesWrong, 500)
         }
     },
 
@@ -49,24 +50,32 @@ const userControllers = {
         const user = {
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            RoleId: req.body.RoleId
         }
 
         try {
             const emailAlreadyExist = await userService.getUserByEmail(user.email)
-
             if (emailAlreadyExist != undefined) {
-                res.sendError(logUser.emailAlreadyExist, 400)
-            } else {
-                await userService.createUser(user)
+                res.sendError(logDefault.emailAlreadyExist, 400)
+                return 
+            } 
 
-                res.status(200).json({
-                    status: 200,
-                    success: true
-                })
-            }
+            const findRoleId = await roleService.getRoleById(user.RoleId)
+            if (findRoleId == undefined) {
+                res.sendError(logRole.roleNotFound, 404)
+                return 
+            } 
+
+            await userService.createUser(user)
+
+            res.status(200).json({
+                status: 200,
+                success: true
+            })
+            
         } catch (err) {
-            res.sendError(logUser.somethingGoesWrong, 500)
+            res.sendError(logDefault.somethingGoesWrong, 500)
         }
     },
 
@@ -88,7 +97,7 @@ const userControllers = {
             }
 
         } catch (err) {
-            res.sendError(logUser.somethingGoesWrong, 500)
+            res.sendError(logDefault.somethingGoesWrong, 500)
         }
     }
 }
