@@ -4,9 +4,14 @@
          description: DataTypes.STRING
      });
      Role.associate = function (models) {
-        Role.hasMany(models.User, {
-            as: 'users'
-        })
+         Role.hasMany(models.User, {
+                 as: 'users'
+             }),
+             Role.belongsToMany(models.Permission, {
+                 through: 'Roles-Permissions',
+                 as: 'permission',
+                 foreignKey: 'RoleId',
+             })
      }
      return Role;
  }

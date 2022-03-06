@@ -2,7 +2,7 @@ const {Permission, Role} = require('@models')
 
 const RolesService = {
     async getPermissions () {
-        let permissions = await Permission.findAll() 
+        let permissions = await Permission.findAll({ include: {model: Role, as: 'role'} }) 
         
         return permissions
     },
