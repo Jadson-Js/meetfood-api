@@ -1,9 +1,8 @@
-const bcrypt = require('bcryptjs')
-const {Role} = require('@models')
+const {Role, User} = require('@models')
 
 const RolesService = {
     async getRoles () {
-        let role = await Role.findAll() 
+        let role = await Role.findAll({ include: {model: User, as: 'user'} }) 
         
         return role
     },

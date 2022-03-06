@@ -4,9 +4,9 @@
          description: DataTypes.STRING
      });
      Role.associate = function (models) {
-         Role.hasMany(models.User, {
-             as: 'UserId'
-         })
+        Role.hasMany(models.User, {
+            as: 'users'
+        })
      }
      return Role;
  }

@@ -1,33 +1,33 @@
-const roleService = require('@services/role')
-const { logDefault, logRole } = require('@utils/constants')
+const permissionService = require('@services/permission')
+const { logDefault, logPermission } = require('@utils/constants')
 
-const roleControllers = {
-    async getRoles(req, res) {
+const permissionControllers = {
+    async getPermissions(req, res) {
         try {
-            const roles = await roleService.getRoles()
+            const permissions = await permissionService.getPermissions()
 
             res.status(200).json({
                 status: 200,
-                data: roles
+                data: permissions
             })
         } catch (err) {
             res.sendError(logDefault.somethingGoesWrong, 500)
         }
     },
 
-    async createRole(req, res) {
-        const role = {
+    async createPermission(req, res) {
+        const permission = {
             name: req.body.name,
             description: req.body.description
         }
 
         try {
-            const nameAlreadyExist = await roleService.getRoleByName(role.name)
+            const nameAlreadyExist = await permissionService.getPermissionByName(permission.name)
 
             if (nameAlreadyExist != undefined) {
                 res.sendError(logDefault.nameAlreadyExist, 400)
             } else {
-                await roleService.createRole(role)
+                await permissionService.createPermission(permission)
 
                 res.status(200).json({
                     status: 200,
@@ -39,16 +39,16 @@ const roleControllers = {
         }
     },
 
-    async deleteRole(req, res) {
+    async deletePermission(req, res) {
         const id = req.params.id
 
         try {
-            let idExists = await roleService.getRoleById(id)
+            let idExists = await permissionService.getPermissionById(id)
 
             if (!idExists) {
-                res.sendError(logRole.roleNotFound, 404)
+                res.sendError(logPermission.permissionNotFound, 404)
             } else {
-                await roleService.deleteRoleById(id)
+                await permissionService.deletePermissionById(id)
 
                 res.status(200).json({
                     status: 200,
@@ -62,4 +62,4 @@ const roleControllers = {
     }
 }
 
-module.exports = roleControllers
+module.exports = permissionControllers

@@ -11,6 +11,7 @@ const sendError = require('@helpers/sendErrors')
 const loginRoutes = require('@routes/login')
 const userRoutes = require('@routes/user')
 const roleRoutes = require('@routes/role')
+const permissionRoutes = require('@routes/permission')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -26,5 +27,6 @@ app.use(sendError)
 app.use('/', loginRoutes)
 app.use('/', userRoutes)
 app.use('/', roleRoutes)
+app.use('/', permissionRoutes)
 
 module.exports = app

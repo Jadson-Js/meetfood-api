@@ -4,24 +4,24 @@ const { check } = require('express-validator');
 const verifyToken = require('@middleware/verifyToken')
 
 const validResult = require('@helpers/validResult')
-const roleControllers = require('@controllers/role')
-const { logDefault, logRole } = require('@utils/constants')
+const permissionControllers = require('@controllers/permission')
+const { logDefault } = require('@utils/constants')
 
-router.get('/roles', 
-    roleControllers.getRoles
+router.get('/permissions', 
+    permissionControllers.getPermissions
 )
 
-router.post('/role', 
+router.post('/permission', 
     check('name').isString().isLength({ min: 1, max: 32 }).withMessage(logDefault.invalidName),
     check('description').isString().isLength({ min: 1, max: 498 }).withMessage(logDefault.invalidDescription), 
     validResult,
-    roleControllers.createRole
+    permissionControllers.createPermission
 )
 
-router.delete('/role/:id',
+router.delete('/permission/:id',
     check('id').isNumeric().withMessage(logDefault.invalidId),
     validResult,
-    roleControllers.deleteRole
+    permissionControllers.deletePermission
 )
 
 module.exports = router
