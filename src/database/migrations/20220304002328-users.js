@@ -33,7 +33,9 @@
         references:{
           model: 'Roles',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       updatedAt: Sequelize.DATE,
       createdAt: Sequelize.DATE
