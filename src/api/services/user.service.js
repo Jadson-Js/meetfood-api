@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const {User, Role} = require('@models')
+const {User} = require('@models')
 
 const usersService = {
     async getUsers () {
@@ -35,7 +35,7 @@ const usersService = {
         const salt = bcrypt.genSaltSync(saltRounds)
         const hash = bcrypt.hashSync(user.password, salt)
 
-        return await User.create({ name: user.name, email: user.email, password: hash, RoleId: user.RoleId });
+        return await User.create({ name: user.name, email: user.email, password: hash});
     },
 
     async deleteUserById(id) {

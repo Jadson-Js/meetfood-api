@@ -3,7 +3,11 @@
          name: DataTypes.STRING,
          email: DataTypes.STRING,
          password: DataTypes.STRING,
-         RoleId: DataTypes.INTEGER
+         RoleId: {
+             type: DataTypes.INTEGER,
+             allowNull: false,
+             defaultValue: 1
+         }
      });
      User.associate = function (models) {
          User.belongsTo(models.Role, {

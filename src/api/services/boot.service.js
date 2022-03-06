@@ -13,7 +13,7 @@ module.exports = (err) => {
             if (error) {
                 return console.log('Unespected error')
             } else {
-                console.log(`Start in http://localhost:${config.development.port}`)
+                console.log(`Start in http://localhost:${config.app.port}`)
             }
         })
     }

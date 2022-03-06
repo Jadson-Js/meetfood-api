@@ -15,7 +15,8 @@ const logUser = {
     tokenNotProvide: "No token provide.",
     tokenUnauthentic: "unauthentic token",
     requiredLogged: "Need to be logged in",
-    AccessDenied: "Logged in user does not have access to this content"
+    AccessDenied: "Logged in user does not have access to this content",
+    notAllowedSetRole: "It is not allowed to set role"
 }
 
 const logRole = {

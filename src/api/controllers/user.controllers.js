@@ -1,5 +1,4 @@
 const userService = require('@services/user')
-const roleService = require('@services/role')
 const { logDefault, logUser } = require('@utils/constants')
 
 const userControllers = {
@@ -50,20 +49,13 @@ const userControllers = {
         const user = {
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password,
-            RoleId: req.body.RoleId
+            password: req.body.password
         }
 
         try {
             const emailAlreadyExist = await userService.getUserByEmail(user.email)
             if (emailAlreadyExist != undefined) {
                 res.sendError(logDefault.emailAlreadyExist, 400)
-                return 
-            } 
-
-            const findRoleId = await roleService.getRoleById(user.RoleId)
-            if (findRoleId == undefined) {
-                res.sendError(logRole.roleNotFound, 404)
                 return 
             } 
 

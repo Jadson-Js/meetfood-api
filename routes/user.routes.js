@@ -5,7 +5,7 @@ const verifyToken = require('@middleware/verifyToken')
 
 const validResult = require('@helpers/validResult')
 const userControllers = require('@controllers/user')
-const {  logDefault, logUser } = require('@utils/constants')
+const {  logDefault, logUser, logRole } = require('@utils/constants')
 
 router.get('/users', 
     userControllers.getUsers
@@ -21,6 +21,7 @@ router.post('/user',
     check('name').isLength({ min: 1, max: 32 }).isString().withMessage(logDefault.invalidName),
     check('email').isLength({ min: 1, max: 256 }).isEmail().normalizeEmail().withMessage(logDefault.invalidEmail), 
     check('password').isLength({ min: 8, max: 160 }).withMessage(logDefault.invalidPassword),
+    check('RoleId').isEmpty().withMessage(logRole.notAllowedSetRole),
     validResult,
     userControllers.createUser
 )
