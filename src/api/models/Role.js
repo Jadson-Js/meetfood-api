@@ -8,7 +8,7 @@
                  as: 'users'
              }),
              Role.belongsToMany(models.Permission, {
-                 through: 'Roles-Permissions',
+                 through: 'RolePermissions',
                  as: 'permission',
                  foreignKey: 'RoleId',
              })

@@ -12,6 +12,7 @@ const loginRoutes = require('@routes/login')
 const userRoutes = require('@routes/user')
 const roleRoutes = require('@routes/role')
 const permissionRoutes = require('@routes/permission')
+const rolePermissionRoutes = require('@routes/role-permission')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -27,6 +28,7 @@ app.use(sendError)
 app.use('/', loginRoutes)
 app.use('/', userRoutes)
 app.use('/', roleRoutes)
-app.use('/', permissionRoutes)
+app.use('/', permissionRoutes) 
+app.use('/', rolePermissionRoutes)
 
 module.exports = app
