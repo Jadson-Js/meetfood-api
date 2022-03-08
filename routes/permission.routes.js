@@ -9,6 +9,12 @@ const { logDefault } = require('@utils/constants')
 
 router.get('/permissions', 
     permissionControllers.getPermissions
+),
+
+router.get('/permission/:id',
+    check('id').isNumeric().withMessage(logDefault.invalidId),
+    validResult,
+    permissionControllers.getPermission
 )
 
 router.post('/permission', 

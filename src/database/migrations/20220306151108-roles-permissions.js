@@ -13,7 +13,6 @@ module.exports = {
       },
       RoleId: {
         type: Sequelize.INTEGER,
-        defaultValue: 1,
         allowNull: false,
         references: {
           model: 'Roles',
@@ -24,7 +23,6 @@ module.exports = {
       },
       PermissionId: {
         type: Sequelize.INTEGER,
-        defaultValue: 1,
         allowNull: false,
         references: {
           model: 'Permissions',

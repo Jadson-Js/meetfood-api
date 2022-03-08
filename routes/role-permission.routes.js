@@ -8,7 +8,13 @@ const rolePermissionControllers = require('@controllers/role-permission')
 const { logDefault, logRole } = require('@utils/constants')
 
 router.get('/roles-permissions', 
-    rolePermissionControllers.getRolesPermissions
+    rolePermissionControllers.getRelationships
+)
+
+router.get('/role-permission/:id',
+    check('id').isNumeric().withMessage(logDefault.invalidId),
+    validResult,
+    rolePermissionControllers.getRelationship
 )
 
 router.post('/role-permission', 

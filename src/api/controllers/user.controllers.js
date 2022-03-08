@@ -2,6 +2,19 @@ const userService = require('@services/user')
 const { logDefault, logUser } = require('@utils/constants')
 
 const userControllers = {
+    async getUsers(req, res) {
+        try {
+            const users = await userService.getUsers()
+
+            res.status(200).json({
+                status: 200,
+                data: users
+            })
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+    },
+
     async getUser(req, res) {
         const id = req.params.id
 
@@ -30,19 +43,6 @@ const userControllers = {
             res.sendError(logDefault.somethingGoesWrong, 500)
         }
 
-    },
-
-    async getUsers(req, res) {
-        try {
-            const users = await userService.getUsers()
-
-            res.status(200).json({
-                status: 200,
-                data: users
-            })
-        } catch (err) {
-            res.sendError(logDefault.somethingGoesWrong, 500)
-        }
     },
 
     async createUser(req, res) {

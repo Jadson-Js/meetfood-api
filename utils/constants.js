@@ -1,8 +1,8 @@
 const logDefault = {
+    invalidId: "Invalid id.",
     invalidName: "Invalid name.",
     invalidEmail: "Invalid email.",
     invalidPassword: "invalid password.",
-    invalidId: "Invalid id.",
     invalidDescription: "Invalid description",
     nameAlreadyExist: "Email already exist.",
     emailAlreadyExist: "Email already exist.",
@@ -23,4 +23,12 @@ const logRole = {
     roleNotFound: "Role not found.",
 }
 
-module.exports = {logDefault, logUser, logRole}
+const logPermission = {
+    permissionNotFound: "Permission not found.",
+}
+
+const logRolePermission = {
+    relationshipNotFound: "Relationship not found.",
+}
+
+module.exports = {logDefault, logUser, logRole, logPermission}

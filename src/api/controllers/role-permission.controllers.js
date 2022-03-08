@@ -1,37 +1,70 @@
 const rolePermissionService = require('@services/role-permission')
-const { logDefault, logRole } = require('@utils/constants')
+const roleService = require('@services/role')
+const permissionService = require('@services/permission')
+const { logDefault, logRole, logPermission, logRolePermission } = require('@utils/constants')
 
 const rolePermissionsControllers = {
-    async getRolesPermissions(req, res) {
-        
-            const rolesPermissions = await rolePermissionService.getRolesPermissions()
+    async getRelationships(req, res) {
+        try {
+            const relationships = await rolePermissionService.getRelationships()
 
             res.status(200).json({
                 status: 200,
-                data: rolesPermissions
+                data: relationships
             })
-        
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+    },
+
+    async getRelationship(req, res) {
+        const id = req.params.id
+
+        try {
+            const relationship = await rolePermissionService.getRelationshipById(id)
+
+            if (!relationship) {
+                res.sendError(logRolePermission.relationshipNotFound, 404)
+            } else {
+                res.status(200).json({
+                    status: 200,
+                    data: relationship
+                })
+            }
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+
     },
 
     async createRolePermission(req, res) {
-        const role = {
-            name: req.body.name,
-            description: req.body.description
+        const relationship = {
+            RoleId: req.body.RoleId,
+            PermissionId: req.body.PermissionId
         }
 
         try {
-            const nameAlreadyExist = await rolePermissionService.getRoleByName(role.name)
+            const roleIdAlreadyExist = await roleService.getRoleById(relationship.RoleId)
 
-            if (nameAlreadyExist != undefined) {
-                res.sendError(logDefault.nameAlreadyExist, 400)
-            } else {
-                await rolePermissionService.createRole(role)
+            if (roleIdAlreadyExist === undefined) {
+                res.sendError(logRole.roleNotFound, 404)
+                return
+            } 
 
-                res.status(200).json({
-                    status: 200,
-                    success: true
-                })
+            const permissionIdAlreadyExist = await permissionService.getPermissionById(relationship.PermissionId)
+
+            if (permissionIdAlreadyExist == undefined) {
+                res.sendError(logPermission.permissionNotFound, 404)
+                return
             }
+
+            await rolePermissionService.createRelationship(relationship)
+
+            res.status(200).json({
+                status: 200,
+                success: true
+            })
+            
         } catch (err) {
             res.sendError(logDefault.somethingGoesWrong, 500)
         }
@@ -41,12 +74,12 @@ const rolePermissionsControllers = {
         const id = req.params.id
 
         try {
-            let idExists = await rolePermissionService.getRoleById(id)
+            let idExists = await rolePermissionService.getRelationshipById(id)
 
             if (!idExists) {
-                res.sendError(logRole.roleNotFound, 404)
+                res.sendError(logRolePermission.relationshipNotFound, 404)
             } else {
-                await rolePermissionService.deleteRoleById(id)
+                await rolePermissionService.deleteRelationshipById(id)
 
                 res.status(200).json({
                     status: 200,

@@ -9,7 +9,7 @@
              }),
              Role.belongsToMany(models.Permission, {
                  through: 'RolePermissions',
-                 as: 'permission',
+                 as: 'permissions',
                  foreignKey: 'RoleId',
              })
      }

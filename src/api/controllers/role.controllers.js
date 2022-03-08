@@ -15,6 +15,26 @@ const roleControllers = {
         }
     },
 
+    async getRole(req, res) {
+        const id = req.params.id
+
+        try {
+            const role = await roleService.getRoleById(id)
+
+            if (!role) {
+                res.sendError(logRole.roleNotFound, 404)
+            } else {
+                res.status(200).json({
+                    status: 200,
+                    data: role
+                })
+            }
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+
+    },
+
     async createRole(req, res) {
         const role = {
             name: req.body.name,

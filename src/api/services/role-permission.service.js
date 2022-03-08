@@ -1,40 +1,25 @@
-const {RolePermission} = require('@models')
+const {RolePermission, Role, Permission} = require('@models')
 
 const rolePermissionService = {
-    async getRolesPermissions () {
-        let relationship = await RolePermission.findAll() 
+    async getRelationships () {
+        let relationships = await RolePermission.findAll() 
+        
+        return relationships
+    },
+
+    async getRelationshipById(id) {
+        let relationship = await RolePermission.findByPk(id) 
         
         return relationship
     },
 
-    async getRoleById(id) {
-        let role = await Role.findByPk(id) 
-        
-        return role
+
+    async createRelationship(relationship) {
+        return await RolePermission.create({ RoleId: relationship.RoleId, PermissionId: relationship.PermissionId });
     },
 
-    async getRoleByName(name) {
-        let role = await Role.findOne({
-            where: {name: name}
-        })
-        
-        return role
-    },
-
-    async getRoleByEmail(email) {
-        let role = await Role.findOne({
-            where: {email: email}
-        })
-        
-        return role
-    },
-
-    async createRole(role) {
-        return await Role.create({ name: role.name, description: role.description });
-    },
-
-    async deleteRoleById(id) {
-        return await Role.destroy({
+    async deleteRelationshipById(id) {
+        return await RolePermission.destroy({
             where: { id: id }
         })
     }

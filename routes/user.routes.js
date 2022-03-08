@@ -5,14 +5,14 @@ const verifyToken = require('@middleware/verifyToken')
 
 const validResult = require('@helpers/validResult')
 const userControllers = require('@controllers/user')
-const {  logDefault, logUser, logRole } = require('@utils/constants')
+const {  logDefault, logRole } = require('@utils/constants')
 
 router.get('/users', 
     userControllers.getUsers
 )
 
 router.get('/user/:id',
-    check('id').isNumeric().withMessage(logUser.invalidId),
+    check('id').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     userControllers.getUser
 )

@@ -15,6 +15,26 @@ const permissionControllers = {
         }
     },
 
+    async getPermission(req, res) {
+        const id = req.params.id
+
+        try {
+            const permission = await permissionService.getPermissionById(id)
+
+            if (!permission) {
+                res.sendError(logPermission.permissionNotFound, 404)
+            } else {
+                res.status(200).json({
+                    status: 200,
+                    data: permission
+                })
+            }
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+
+    },
+
     async createPermission(req, res) {
         const permission = {
             name: req.body.name,

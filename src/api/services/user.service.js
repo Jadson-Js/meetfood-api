@@ -3,7 +3,7 @@ const {User, Role} = require('@models')
 
 const usersService = {
     async getUsers () {
-        let user = await User.findAll({ include: {model: Role, as: 'role'} }) 
+        let user = await User.findAll() 
         
         return user
     },
