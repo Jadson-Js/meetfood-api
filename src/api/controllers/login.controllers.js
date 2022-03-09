@@ -33,10 +33,7 @@ const loginControllers = {
             if (!validUser) {
                 res.sendError(constants.invalidCredentials, 403)
             } else {
-                const {
-                    id,
-                    email
-                } = userFound
+                const { id, email } = userFound
 
                 const token = await loginService.createToken(id, email)
 
@@ -45,7 +42,6 @@ const loginControllers = {
                 res.status(200).json({
                     status: 200,
                     auth: true,
-                    user: userFound,
                     token: token
                 })
             }

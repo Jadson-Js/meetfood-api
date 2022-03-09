@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { check } = require('express-validator');
 
-const verifyToken = require('@middleware/verifyToken')
+const verifyToken = require('@middlewares/verifyToken')
 
 const validResult = require('@helpers/validResult')
 const permissionControllers = require('@controllers/permission')

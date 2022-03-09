@@ -11,12 +11,11 @@ const logDefault = {
 
 const logUser = {
     userNotFound: "User not found.",
+    requiredLogged: "Need to be logged in",
     invalidCredentials: "Name or password are incorrect.",
     tokenNotProvide: "No token provide.",
     tokenUnauthentic: "unauthentic token",
-    requiredLogged: "Need to be logged in",
-    AccessDenied: "Logged in user does not have access to this content",
-    notAllowedSetRole: "It is not allowed to set role"
+    AccessDenied: "Logged in user does not have access to this content"
 }
 
 const logRole = {
@@ -25,6 +24,7 @@ const logRole = {
 
 const logPermission = {
     permissionNotFound: "Permission not found.",
+    getPermissionRequired: "Permission to get required"
 }
 
 const logRolePermission = {

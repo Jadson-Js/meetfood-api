@@ -74,6 +74,10 @@ const userControllers = {
     async deleteUser(req, res) {
         const id = req.params.id
 
+        if (id == 1) {
+            
+        }
+
         try {
             let idExists = await userService.getUserById(id)
 
