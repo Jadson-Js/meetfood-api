@@ -15,30 +15,34 @@ const loginControllers = {
     },
 
     async loginUser(req, res) {
-        const user = {
+        const findUser = {
             email: req.body.email,
             password: req.body.password
         }
 
         try {
-            const userFound = await userService.getUserByEmail(user.email)
+            let userFound = await userService.getUserByEmail(findUser.email)
 
             if (!userFound) {
                 res.sendError(constants.userNotFound, 404)
                 return
             }
 
-            const validUser = await loginService.verifyPassword(user.password, userFound.password)
+            const validUser = await loginService.verifyPassword(findUser.password, userFound.password)
 
             if (!validUser) {
                 res.sendError(constants.invalidCredentials, 403)
             } else {
-                const { id, email } = userFound
+                const { id, name, email, password, roleId } = userFound
 
-                const token = await loginService.createToken(id, email)
+                const token = await loginService.createToken(id, email);
 
-                req.session.loggedUser = userFound
-                req.session.token = token
+                const data = {
+                    id, name, email, password, roleId, token
+                }
+                
+                req.session.loggedUser = data
+
                 res.status(200).json({
                     status: 200,
                     auth: true,

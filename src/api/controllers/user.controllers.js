@@ -23,7 +23,7 @@ const userControllers = {
             return
         }
 
-        if (id != req.session.loggedUser.id) {
+        if (req.session.loggedUser.id != id) {
             res.sendError(logUser.AccessDenied, 403)
             return
         }

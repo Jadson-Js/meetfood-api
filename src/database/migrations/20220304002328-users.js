@@ -29,13 +29,13 @@
       RoleId:{
         type: Sequelize.INTEGER,
         defaultValue: 1,
-        allowNull: false,
+        allowNull: true,
         references:{
           model: 'Roles',
           key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       },
       updatedAt: Sequelize.DATE,
       createdAt: Sequelize.DATE
