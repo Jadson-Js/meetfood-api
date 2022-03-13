@@ -38,6 +38,13 @@ const usersService = {
         return await User.create({ name: user.name, email: user.email, password: hash});
     },
 
+    async updateUserRole(userId, newRoleId) {
+        User.update(
+            { RoleId: newRoleId},
+            { where: { id: userId } }
+        )
+    },
+
     async deleteUserById(id) {
         await User.destroy({
             where: { id: id }

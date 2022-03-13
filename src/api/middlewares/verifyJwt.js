@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const config = require('@config')
-const constants = require('@utils/constants')
+const { logUser } = require('@utils/constants')
 
 function verifyJwt(req, res, next) {
     const token = req.headers['authorization']
@@ -12,7 +12,7 @@ function verifyJwt(req, res, next) {
 
     jwt.verify(token, config.jwt.secret, (err, data) => {
         if (err) {
-            res.sendError(constants.tokenUnauthentic, 401)
+            res.sendError(logUser.tokenUnauthentic, 401)
         } else {
             next()
         }

@@ -14,7 +14,7 @@ const logUser = {
     requiredLogged: "Need to be logged in",
     invalidCredentials: "Name or password are incorrect.",
     tokenNotProvide: "No token provide.",
-    tokenUnauthentic: "unauthentic token",
+    tokenUnauthentic: "Unauthentic token",
     AccessDenied: "Logged in user does not have access to this content"
 }
 

@@ -2,11 +2,16 @@ const router = require('express').Router()
 const { check } = require('express-validator');
 
 const validResult = require('@helpers/validResult')
-const authGet = require('@middlewares/authGet')
+
+const verifyJwt = require('@middlewares/verifyJwt')
+const authGet = require('@auth/authGet')
+
 const loginControllers = require('@controllers/login')
+
 const { logDefault } = require('@utils/constants')
 
 router.get('/',
+    verifyJwt,
     authGet,
     loginControllers.helloWorld
 )

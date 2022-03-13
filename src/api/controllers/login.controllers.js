@@ -20,9 +20,8 @@ const loginControllers = {
             password: req.body.password
         }
 
-        try {
+        // try {
             let userFound = await userService.getUserByEmail(findUser.email)
-
             if (!userFound) {
                 res.sendError(constants.userNotFound, 404)
                 return
@@ -33,15 +32,15 @@ const loginControllers = {
             if (!validUser) {
                 res.sendError(constants.invalidCredentials, 403)
             } else {
-                const { id, name, email, password, roleId } = userFound
+                const token = await loginService.createToken(userFound.id, userFound.email);
 
-                const token = await loginService.createToken(id, email);
-
-                const data = {
-                    id, name, email, password, roleId, token
+                req.session.userSession = {
+                    id: userFound.id, 
+                    name: userFound.name, 
+                    email: userFound.email, 
+                    password: userFound.password, 
+                    roleId: userFound.roleId,
                 }
-                
-                req.session.loggedUser = data
 
                 res.status(200).json({
                     status: 200,
@@ -50,9 +49,9 @@ const loginControllers = {
                 })
             }
 
-        } catch (err) {
-            res.sendError(constants.somethingGoesWrong, 500)
-        }
+        // } catch (err) {
+        //     res.sendError(constants.somethingGoesWrong, 500)
+        // }
     }
 }
 

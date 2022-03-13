@@ -1,5 +1,6 @@
 const userService = require('@services/user')
-const { logDefault, logUser } = require('@utils/constants')
+const roleService = require('@services/role')
+const { logDefault, logUser, logRole } = require('@utils/constants')
 
 const userControllers = {
     async getUsers(req, res) {
@@ -71,12 +72,36 @@ const userControllers = {
         }
     },
 
+    async updateUserRole (req, res) {
+        const {userId, newRoleId} = req.body
+
+        try {
+            const user = await userService.getUserById(userId)
+            if (!user) {
+                res.sendError(logUser.userNotFound, 404)
+                return
+            }
+
+            const role = await roleService.getRoleById(newRoleId)
+            if (!role) {
+                res.sendError(logRole.roleNotFound, 404)
+                return
+            }
+        
+            await userService.updateUserRole(userId, newRoleId)
+
+            res.status(200).json({
+                status: 200,
+                success: true
+            })
+
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+    },
+
     async deleteUser(req, res) {
         const id = req.params.id
-
-        if (id == 1) {
-            
-        }
 
         try {
             let idExists = await userService.getUserById(id)
