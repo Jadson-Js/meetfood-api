@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const {User, Role} = require('@models')
+const {User, Product} = require('@models')
 
 const usersService = {
     async getUsers () {
@@ -9,7 +9,9 @@ const usersService = {
     },
 
     async getUserById(id) {
-        let user = await User.findByPk(id) 
+        let user = await User.findByPk(id, {
+            include: {model: Product, as: 'products'}
+        }) 
         
         return user
     },

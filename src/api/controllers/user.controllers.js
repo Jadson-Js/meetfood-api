@@ -1,6 +1,7 @@
 const userService = require('@services/user')
+const productService = require('@services/product')
 const roleService = require('@services/role')
-const { logDefault, logUser, logRole } = require('@utils/constants')
+const { logDefault, logUser, logProduct, logRole } = require('@utils/constants')
 
 const userControllers = {
     async getUsers(req, res) {
@@ -18,16 +19,6 @@ const userControllers = {
 
     async getUser(req, res) {
         const id = req.params.userId
-
-        if (req.session.userSession == undefined) {
-            res.sendError(logUser.requiredLogged, 401)
-            return
-        }
-
-        if (req.session.userSession.id != id) {
-            res.sendError(logUser.AccessDenied, 403)
-            return
-        }
 
         try {
             const user = await userService.getUserById(id)
@@ -61,6 +52,37 @@ const userControllers = {
             } 
 
             await userService.createUser(user)
+
+            res.status(200).json({
+                status: 200,
+                success: true
+            })
+            
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+    },
+
+    async createUserProduct(req, res) {
+        if (req.session.userSession == undefined) {
+            res.sendError(logUser.requiredLogged, 401)
+            return
+        }
+
+        const product = {
+            title: req.body.title,
+            description: req.body.description,
+            price: req.body.price,
+            userId: req.session.userSession.id,
+        }
+
+        try {
+            const user = await userService.getUserById(id)
+            if (!user) {
+                res.sendError(logUser.userNotFound, 404)
+            }
+
+            await productService.createUserProduct(product)
 
             res.status(200).json({
                 status: 200,
@@ -110,6 +132,28 @@ const userControllers = {
                 res.sendError(logUser.userNotFound, 404)
             } else {
                 await userService.deleteUserById(id)
+
+                res.status(200).json({
+                    status: 200,
+                    success: true
+                })
+            }
+
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+    },
+
+    async deleteUserProduct(req, res) {
+        const id = req.params.productId
+
+        try {
+            let idExists = await productService.getProductById(id)
+            if (!idExists) {
+                res.sendError(logProduct.productNotFound, 404)
+
+            } else {
+                await productService.deleteUserProductById(id)
 
                 res.status(200).json({
                     status: 200,

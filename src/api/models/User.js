@@ -11,9 +11,12 @@
      });
      User.associate = function (models) {
          User.belongsTo(models.Role, {
-             foreingkey: 'RoleId',
-             as: 'role'
-         })
+                 foreingkey: 'RoleId',
+                 as: 'role'
+             }),
+             User.hasMany(models.Product, {
+                 as: 'products'
+             })
      }
      return User;
  }

@@ -4,7 +4,8 @@ const logDefault = {
     invalidEmail: "Invalid email.",
     invalidPassword: "invalid password.",
     invalidTitle: "Invalid title.",
-    invalidDescription: "Invalid description",
+    invalidDescription: "Invalid description.",
+    invalidPrice: "Invalid price.",
     nameAlreadyExist: "Email already exist.",
     titleAlreadyExist: "Email already exist.",
     emailAlreadyExist: "Email already exist.",
@@ -20,6 +21,10 @@ const logUser = {
     AccessDenied: "Logged in user does not have access to this content"
 }
 
+const logProduct = {
+    productNotFound: "Product not found."
+}
+
 const logRole = {
     roleNotFound: "Role not found.",
 }
@@ -33,4 +38,4 @@ const logRolePermission = {
     relationshipNotFound: "Relationship not found.",
 }
 
-module.exports = {logDefault, logUser, logRole, logPermission}
+module.exports = {logDefault, logUser, logProduct, logRole, logPermission}
