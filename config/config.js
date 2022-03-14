@@ -35,8 +35,9 @@ module.exports = {
     secret: process.env.SESSION_SECRET
   },
   permissions: {
-    get: process.env.PERMISSION_GET,
-    post: process.env.PERMISSION_POST,
-    delete: process.env.PERMISSION_DELETE
+    getId: process.env.PERMISSION_GET,
+    postId: process.env.PERMISSION_POST,
+    putId: process.env.PERMISSION_PUT,
+    deleteId: process.env.PERMISSION_DELETE
   }
 }

@@ -24,7 +24,7 @@ const logRole = {
 
 const logPermission = {
     permissionNotFound: "Permission not found.",
-    getPermissionRequired: "Permission to get required"
+    permissionRequired: "Permission to access this route required"
 }
 
 const logRolePermission = {
