@@ -15,9 +15,9 @@ const RolesService = {
         return role
     },
 
-    async getRoleByName(name) {
+    async getRoleByTitle(title) {
         let role = await Role.findOne({
-            where: {name: name}
+            where: {title: title}
         })
         
         return role
@@ -32,7 +32,7 @@ const RolesService = {
     },
 
     async createRole(role) {
-        return await Role.create({ name: role.name, description: role.description });
+        return await Role.create({ title: role.title, description: role.description });
     },
 
     async deleteRoleById(id) {

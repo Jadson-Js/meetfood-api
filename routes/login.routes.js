@@ -12,7 +12,7 @@ const { logDefault } = require('@utils/constants')
 
 router.get('/',
     verifyJwt,
-    authPermission(config.permissions.postId),
+    authPermission(config.permissions.getId),
     loginControllers.helloWorld
 )
 

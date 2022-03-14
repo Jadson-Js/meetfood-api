@@ -11,13 +11,13 @@
         autoIncrement: true,
         primaryKey: true
       },
-      name: {
-        type: Sequelize.STRING,
+      title: {
+        type: Sequelize.STRING(32),
         unique: true,
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(256),
         unique: true,
         allowNull: false,
       },

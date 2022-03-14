@@ -11,9 +11,9 @@ router.get('/users',
     userControllers.getUsers
 )
 
-router.get('/user/:id',
+router.get('/user/:userId',
     verifyJwt,
-    check('id').isNumeric().withMessage(logDefault.invalidId),
+    check('userId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     userControllers.getUser
 )
@@ -34,8 +34,8 @@ router.put('/user/role',
     userControllers.updateUserRole
 )
 
-router.delete('/user/:id',
-    check('id').isNumeric().withMessage(logDefault.invalidId),
+router.delete('/user/:userId',
+    check('userId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     userControllers.deleteUser
 )

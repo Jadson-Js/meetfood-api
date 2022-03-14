@@ -16,7 +16,7 @@ const roleControllers = {
     },
 
     async getRole(req, res) {
-        const id = req.params.id
+        const id = req.params.roleId
 
         try {
             const role = await roleService.getRoleById(id)
@@ -37,15 +37,15 @@ const roleControllers = {
 
     async createRole(req, res) {
         const role = {
-            name: req.body.name,
+            title: req.body.title,
             description: req.body.description
         }
 
         try {
-            const nameAlreadyExist = await roleService.getRoleByName(role.name)
+            const titleAlreadyExist = await roleService.getRoleByTitle(role.title)
 
-            if (nameAlreadyExist != undefined) {
-                res.sendError(logDefault.nameAlreadyExist, 400)
+            if (titleAlreadyExist != undefined) {
+                res.sendError(logDefault.titleAlreadyExist, 400)
             } else {
                 await roleService.createRole(role)
 
@@ -60,7 +60,7 @@ const roleControllers = {
     },
 
     async deleteRole(req, res) {
-        const id = req.params.id
+        const id = req.params.roleId
 
         try {
             let idExists = await roleService.getRoleById(id)

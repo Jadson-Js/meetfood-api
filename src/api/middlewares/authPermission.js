@@ -10,7 +10,7 @@ const authGet = (requiredPermissionId) => {
         userSession = req.session.userSession
 
         if (!userSession) {
-            res.sendError(logUser.AccessDenied, 403)
+            res.sendError(logUser.requiredLogged, 401)
 
         } else {
             const userRoleId = userSession.roleId
@@ -19,12 +19,14 @@ const authGet = (requiredPermissionId) => {
             let authorizedPermission = false
 
             for (let permission of role.permissions) {
+                console.log(`Eu tenho a permission ${permission.dataValues.id} mas presciso da ${requiredPermissionId}`)
                 if (permission.dataValues.id == requiredPermissionId) {
+                    
                     authorizedPermission = true
                 }
             }
 
-            authorizedPermission ? next() : res.sendError(logPermission.permissionRequired, 403)
+            authorizedPermission ? next() : res.sendError(requiredPermissionId, 403)
         }
     }
 }

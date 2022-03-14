@@ -3,8 +3,10 @@ const logDefault = {
     invalidName: "Invalid name.",
     invalidEmail: "Invalid email.",
     invalidPassword: "invalid password.",
+    invalidTitle: "Invalid title.",
     invalidDescription: "Invalid description",
     nameAlreadyExist: "Email already exist.",
+    titleAlreadyExist: "Email already exist.",
     emailAlreadyExist: "Email already exist.",
     somethingGoesWrong: "Something goes wrong."
 }

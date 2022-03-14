@@ -17,14 +17,14 @@ const userControllers = {
     },
 
     async getUser(req, res) {
-        const id = req.params.id
+        const id = req.params.userId
 
-        if (req.session.loggedUser == undefined) {
+        if (req.session.userSession == undefined) {
             res.sendError(logUser.requiredLogged, 401)
             return
         }
 
-        if (req.session.loggedUser.id != id) {
+        if (req.session.userSession.id != id) {
             res.sendError(logUser.AccessDenied, 403)
             return
         }
@@ -101,7 +101,7 @@ const userControllers = {
     },
 
     async deleteUser(req, res) {
-        const id = req.params.id
+        const id = req.params.userId
 
         try {
             let idExists = await userService.getUserById(id)

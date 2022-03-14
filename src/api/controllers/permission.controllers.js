@@ -16,7 +16,7 @@ const permissionControllers = {
     },
 
     async getPermission(req, res) {
-        const id = req.params.id
+        const id = req.params.permissionId
 
         try {
             const permission = await permissionService.getPermissionById(id)
@@ -37,15 +37,15 @@ const permissionControllers = {
 
     async createPermission(req, res) {
         const permission = {
-            name: req.body.name,
+            title: req.body.title,
             description: req.body.description
         }
 
         try {
-            const nameAlreadyExist = await permissionService.getPermissionByName(permission.name)
+            const titleAlreadyExist = await permissionService.getPermissionByTitle(permission.title)
 
-            if (nameAlreadyExist != undefined) {
-                res.sendError(logDefault.nameAlreadyExist, 400)
+            if (titleAlreadyExist != undefined) {
+                res.sendError(logDefault.titleAlreadyExist, 400)
             } else {
                 await permissionService.createPermission(permission)
 
@@ -60,7 +60,7 @@ const permissionControllers = {
     },
 
     async deletePermission(req, res) {
-        const id = req.params.id
+        const id = req.params.permissionId
 
         try {
             let idExists = await permissionService.getPermissionById(id)

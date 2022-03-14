@@ -9,21 +9,21 @@ router.get('/roles',
     roleControllers.getRoles
 )
 
-router.get('/role/:id',
-    check('id').isNumeric().withMessage(logDefault.invalidId),
+router.get('/role/:roleId',
+    check('roleId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     roleControllers.getRole
 )
 
 router.post('/role', 
-    check('name').isString().isLength({ min: 1, max: 32 }).withMessage(logDefault.invalidName),
+    check('title').isString().isLength({ min: 1, max: 32 }).withMessage(logDefault.invalidTitle),
     check('description').isString().isLength({ min: 1, max: 498 }).withMessage(logDefault.invalidDescription), 
     validResult,
     roleControllers.createRole
 )
 
-router.delete('/role/:id',
-    check('id').isNumeric().withMessage(logDefault.invalidId),
+router.delete('/role/:roleId',
+    check('roleId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     roleControllers.deleteRole
 )

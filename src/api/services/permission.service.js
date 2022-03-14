@@ -15,16 +15,16 @@ const RolesService = {
         return permission
     },
 
-    async getPermissionByName(name) {
+    async getPermissionByTitle(title) {
         let permission = await Permission.findOne({
-            where: {name: name}
+            where: {title: title}
         })
         
         return permission
     },
 
     async createPermission(permission) {
-        return await Permission.create({ name: permission.name, description: permission.description });
+        return await Permission.create({ title: permission.title, description: permission.description });
     },
 
     async deletePermissionById(id) {

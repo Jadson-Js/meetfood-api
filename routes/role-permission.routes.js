@@ -9,8 +9,8 @@ router.get('/roles-permissions',
     rolePermissionControllers.getRelationships
 )
 
-router.get('/role-permission/:id',
-    check('id').isNumeric().withMessage(logDefault.invalidId),
+router.get('/role-permission/:rolePermissionId',
+    check('rolePermissionId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     rolePermissionControllers.getRelationship
 )
@@ -22,8 +22,8 @@ router.post('/role-permission',
     rolePermissionControllers.createRolePermission
 )
 
-router.delete('/role-permission/:id',
-    check('id').isNumeric().withMessage(logDefault.invalidId),
+router.delete('/role-permission/:rolePermissionId',
+    check('rolePermissionId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     rolePermissionControllers.deleteRolePermission
 )

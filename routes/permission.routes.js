@@ -9,21 +9,21 @@ router.get('/permissions',
     permissionControllers.getPermissions
 ),
 
-router.get('/permission/:id',
-    check('id').isNumeric().withMessage(logDefault.invalidId),
+router.get('/permission/:permissionId',
+    check('permissionId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     permissionControllers.getPermission
 )
 
 router.post('/permission', 
-    check('name').isString().isLength({ min: 1, max: 32 }).withMessage(logDefault.invalidName),
+    check('title').isString().isLength({ min: 1, max: 32 }).withMessage(logDefault.invalidTitle),
     check('description').isString().isLength({ min: 1, max: 498 }).withMessage(logDefault.invalidDescription), 
     validResult,
     permissionControllers.createPermission
 )
 
-router.delete('/permission/:id',
-    check('id').isNumeric().withMessage(logDefault.invalidId),
+router.delete('/permission/:permissionId',
+    check('permissionId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
     permissionControllers.deletePermission
 )
