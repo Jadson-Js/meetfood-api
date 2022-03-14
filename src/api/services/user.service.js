@@ -47,6 +47,13 @@ const usersService = {
         )
     },
 
+    async updateUserProduct(newProduct) {
+        Product.update(
+            { title: newProduct.title, description: newProduct.description, price: newProduct.price},
+            { where: { id: newProduct.productId } }
+        )
+    },
+
     async deleteUserById(id) {
         await User.destroy({
             where: { id: id }

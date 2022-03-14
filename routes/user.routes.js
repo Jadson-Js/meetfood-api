@@ -42,6 +42,15 @@ router.put('/user/role',
     userControllers.updateUserRole
 )
 
+router.put('/user/product/:productId',
+    check('productId').isNumeric().withMessage(logDefault.invalidId),
+    check('newTitle').isString().isLength({ min: 1, max: 32 }).withMessage(logDefault.invalidTitle),
+    check('newDescription').isString().isLength({ min: 1, max: 498 }).withMessage(logDefault.invalidDescription), 
+    check('newPrice').isNumeric().withMessage(logDefault.invalidPrice),
+    validResult,
+    userControllers.updateUserProduct
+)
+
 router.delete('/user/:userId',
     check('userId').isNumeric().withMessage(logDefault.invalidId),
     validResult,

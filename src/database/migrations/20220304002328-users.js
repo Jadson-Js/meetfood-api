@@ -13,7 +13,7 @@
       },
       name:{
         type: Sequelize.STRING(32),
-        unique: false,
+        unique: true,
         allowNull: false,
       },
       email:{

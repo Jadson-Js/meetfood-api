@@ -45,11 +45,17 @@ const userControllers = {
         }
 
         try {
+            const nameAlreadyExist = await userService.getUserByName(user.name)
+            if (nameAlreadyExist != undefined) {
+                res.sendError(logDefault.nameAlreadyExist, 400)
+                return 
+            }
+
             const emailAlreadyExist = await userService.getUserByEmail(user.email)
             if (emailAlreadyExist != undefined) {
                 res.sendError(logDefault.emailAlreadyExist, 400)
                 return 
-            } 
+            }
 
             await userService.createUser(user)
 
@@ -120,6 +126,39 @@ const userControllers = {
         } catch (err) {
             res.sendError(logDefault.somethingGoesWrong, 500)
         }
+    },
+
+    async updateUserProduct (req, res) {
+        if (req.session.userSession == undefined) {
+            res.sendError(logUser.requiredLogged, 401)
+            return
+        }
+        
+        const newProduct = {
+            productId: req.params.productId,
+            title: req.body.newTitle,
+            description: req.body.newDescription,
+            price: req.body.newPrice,
+            userId: req.session.userSession.id,
+        }
+
+        // try {
+            const user = await userService.getUserById(newProduct.userId)
+            if (!user) {
+                res.sendError(logUser.userNotFound, 404)
+                return
+            }
+
+            await userService.updateUserProduct(newProduct)
+
+            res.status(200).json({
+                status: 200,
+                success: true
+            })
+
+        // } catch (err) {
+        //     res.sendError(logDefault.somethingGoesWrong, 500)
+        // }
     },
 
     async deleteUser(req, res) {
