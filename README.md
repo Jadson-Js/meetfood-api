@@ -4,26 +4,26 @@ HOST: http://localhost:3000
 ## Documentation
 ## Users
 ### getUsers
-+ path: ['/']
-+ method: [GET]
++ href: [/users]
++ type: [GET]
 + rel: Returns data for all users.
   
 ### getUserById
-+ path: ['/user/:userId']
-+ method: [GET]
++ href: [/user/:userId]
++ type: [GET]
 + rel: Returns the data of a single user.
 
 ### createUser
-+ path: ['/user']
-+ method: [POST]
++ href: [/user]
++ type: [POST]
 + rel: Create a new user.
 
 ### updateUserRole
-+ path: ['/user/:userId']
-+ method: [PUT]
++ href: [/user/:userId]
++ type: [PUT]
 + rel: Edit the user's role.
 
 ### deleteUser
-+ path: ['/user/:userId']
-+ method: [DELETE]
++ href: [/user/:userId]
++ type: [DELETE]
 + rel: Deletes the user.
