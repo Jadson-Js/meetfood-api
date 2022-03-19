@@ -27,7 +27,7 @@ router.post('/user',
     userControllers.createUser
 )
 
-router.put('/user/role',
+router.put('/user/:userId',
     check('userId').isNumeric().withMessage(logDefault.invalidId),
     check('newRoleId').isNumeric().withMessage(logDefault.invalidId),
     validResult,

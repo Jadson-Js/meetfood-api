@@ -1,7 +1,6 @@
 const userService = require('@services/user')
-const productService = require('@services/product')
 const roleService = require('@services/role')
-const { logDefault, logUser, logProduct, logRole } = require('@utils/constants')
+const { logDefault, logUser, logRole } = require('@utils/constants')
 
 const userControllers = {
     async getUsers(req, res) {
@@ -70,7 +69,8 @@ const userControllers = {
     },
 
     async updateUserRole (req, res) {
-        const {userId, newRoleId} = req.body
+        const userId = req.params.userId
+        const newRoleId = req.body.newRoleId
 
         try {
             const user = await userService.getUserById(userId)
