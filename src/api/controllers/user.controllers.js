@@ -70,20 +70,15 @@ const userControllers = {
     },
 
     async createUserProduct(req, res) {
-        if (req.session.userSession == undefined) {
-            res.sendError(logUser.requiredLogged, 401)
-            return
-        }
-
         const product = {
             title: req.body.title,
             description: req.body.description,
             price: req.body.price,
-            userId: req.session.userSession.id,
+            userId: req.body.userId
         }
 
         try {
-            const user = await userService.getUserById(id)
+            const user = await userService.getUserById(product.userId)
             if (!user) {
                 res.sendError(logUser.userNotFound, 404)
             }
@@ -129,17 +124,12 @@ const userControllers = {
     },
 
     async updateUserProduct (req, res) {
-        if (req.session.userSession == undefined) {
-            res.sendError(logUser.requiredLogged, 401)
-            return
-        }
-        
         const newProduct = {
             productId: req.params.productId,
             title: req.body.newTitle,
             description: req.body.newDescription,
             price: req.body.newPrice,
-            userId: req.session.userSession.id,
+            userId: req.body.userId
         }
 
         // try {
