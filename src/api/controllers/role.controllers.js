@@ -32,7 +32,6 @@ const roleControllers = {
         } catch (err) {
             res.sendError(logDefault.somethingGoesWrong, 500)
         }
-
     },
 
     async createRole(req, res) {

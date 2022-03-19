@@ -16,6 +16,25 @@ const userControllers = {
         }
     },
 
+    async getProductById(req, res) {
+        const id = req.params.productId
+
+        try {
+            const product = await productService.getProductById(id)
+
+            if (!product) {
+                res.sendError(logProduct.productNotFound, 404)
+            } else {
+                res.status(200).json({
+                    status: 200,
+                    data: product
+                })
+            }
+        } catch (err) {
+            res.sendError(logDefault.somethingGoesWrong, 500)
+        }
+    },
+
     async createUserProduct(req, res) {
         const product = {
             title: req.body.title,
