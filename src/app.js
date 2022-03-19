@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
+var cors = require('cors');
 
 const config = require('@config')
 
@@ -15,6 +16,7 @@ const roleRoutes = require('@routes/role')
 const permissionRoutes = require('@routes/permission')
 const rolePermissionRoutes = require('@routes/role-permission')
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser());
