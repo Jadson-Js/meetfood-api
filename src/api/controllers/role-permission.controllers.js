@@ -18,7 +18,7 @@ const rolePermissionsControllers = {
     },
 
     async getRelationship(req, res) {
-        const id = req.params.rolePermissionId
+        const id = req.params.relationshipId
 
         try {
             const relationship = await rolePermissionService.getRelationshipById(id)
@@ -71,7 +71,7 @@ const rolePermissionsControllers = {
     },
 
     async deleteRolePermission(req, res) {
-        const id = req.params.rolePermissionId
+        const id = req.params.relationshiptId
 
         try {
             let idExists = await rolePermissionService.getRelationshipById(id)

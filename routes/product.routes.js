@@ -15,23 +15,22 @@ router.post('/user/product',
     check('description').isString().isLength({ min: 1, max: 498 }).withMessage(logDefault.invalidDescription), 
     check('price').isNumeric().withMessage(logDefault.invalidPrice),
     validResult,
-    userControllers.createUserProduct
+    productControllers.createUserProduct
 )
 
-router.put('/user/product/:productId',
-    check('userId').isNumeric().withMessage(logDefault.invalidId),
+router.put('/product/:productId',
     check('productId').isNumeric().withMessage(logDefault.invalidId),
     check('newTitle').isString().isLength({ min: 1, max: 32 }).withMessage(logDefault.invalidTitle),
     check('newDescription').isString().isLength({ min: 1, max: 498 }).withMessage(logDefault.invalidDescription), 
     check('newPrice').isNumeric().withMessage(logDefault.invalidPrice),
     validResult,
-    userControllers.updateUserProduct
+    productControllers.updateUserProduct
 )
 
-router.delete('/user/product/:productId',
+router.delete('/product/:productId',
     check('productId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
-    userControllers.deleteUserProduct
+    productControllers.deleteUserProduct
 )
 
 module.exports = router

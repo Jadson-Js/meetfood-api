@@ -69,32 +69,6 @@ const userControllers = {
         }
     },
 
-    async createUserProduct(req, res) {
-        const product = {
-            title: req.body.title,
-            description: req.body.description,
-            price: req.body.price,
-            userId: req.body.userId
-        }
-
-        try {
-            const user = await userService.getUserById(product.userId)
-            if (!user) {
-                res.sendError(logUser.userNotFound, 404)
-            }
-
-            await productService.createUserProduct(product)
-
-            res.status(200).json({
-                status: 200,
-                success: true
-            })
-            
-        } catch (err) {
-            res.sendError(logDefault.somethingGoesWrong, 500)
-        }
-    },
-
     async updateUserRole (req, res) {
         const {userId, newRoleId} = req.body
 
@@ -123,34 +97,6 @@ const userControllers = {
         }
     },
 
-    async updateUserProduct (req, res) {
-        const newProduct = {
-            productId: req.params.productId,
-            title: req.body.newTitle,
-            description: req.body.newDescription,
-            price: req.body.newPrice,
-            userId: req.body.userId
-        }
-
-        // try {
-            const user = await userService.getUserById(newProduct.userId)
-            if (!user) {
-                res.sendError(logUser.userNotFound, 404)
-                return
-            }
-
-            await userService.updateUserProduct(newProduct)
-
-            res.status(200).json({
-                status: 200,
-                success: true
-            })
-
-        // } catch (err) {
-        //     res.sendError(logDefault.somethingGoesWrong, 500)
-        // }
-    },
-
     async deleteUser(req, res) {
         const id = req.params.userId
 
@@ -161,28 +107,6 @@ const userControllers = {
                 res.sendError(logUser.userNotFound, 404)
             } else {
                 await userService.deleteUserById(id)
-
-                res.status(200).json({
-                    status: 200,
-                    success: true
-                })
-            }
-
-        } catch (err) {
-            res.sendError(logDefault.somethingGoesWrong, 500)
-        }
-    },
-
-    async deleteUserProduct(req, res) {
-        const id = req.params.productId
-
-        try {
-            let idExists = await productService.getProductById(id)
-            if (!idExists) {
-                res.sendError(logProduct.productNotFound, 404)
-
-            } else {
-                await productService.deleteUserProductById(id)
 
                 res.status(200).json({
                     status: 200,

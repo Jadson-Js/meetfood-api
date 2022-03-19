@@ -20,7 +20,7 @@ const loginControllers = {
             password: req.body.password
         }
 
-        // try {
+        try {
             let userFound = await userService.getUserByEmail(findUser.email)
             if (!userFound) {
                 res.sendError(constants.userNotFound, 404)
@@ -49,9 +49,9 @@ const loginControllers = {
                 })
             }
 
-        // } catch (err) {
-        //     res.sendError(constants.somethingGoesWrong, 500)
-        // }
+        } catch (err) {
+            res.sendError(constants.somethingGoesWrong, 500)
+        }
     }
 }
 

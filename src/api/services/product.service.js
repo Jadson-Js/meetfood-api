@@ -1,4 +1,4 @@
-const {Product} = require('@models')
+const {Product, User} = require('@models')
 
 const productService = {
     async getProducts () {
@@ -8,7 +8,9 @@ const productService = {
     },
 
     async getProductById(id) {
-        let product = await Product.findByPk(id) 
+        let product = await Product.findByPk(id, {
+            include: {model: User, as: 'user'}
+        }) 
         
         return product
     },
@@ -29,6 +31,13 @@ const productService = {
             UserId: product.userId,
             price: product.price
         });
+    },
+
+    async updateUserProduct(newProduct) {
+        Product.update(
+            { title: newProduct.title, description: newProduct.description, price: newProduct.price},
+            { where: { id: newProduct.productId } }
+        )
     },
 
     async deleteUserProductById(id) {

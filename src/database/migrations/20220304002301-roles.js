@@ -18,7 +18,7 @@
       },
       description: {
         type: Sequelize.STRING(498),
-        unique: true,
+        unique: false,
         allowNull: false,
       },
       updatedAt: Sequelize.DATE,
