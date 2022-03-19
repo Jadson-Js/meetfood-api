@@ -12,7 +12,7 @@ router.get('/roles-permissions',
 router.get('/role-permission/:relationshipId',
     check('relationshipId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
-    rolePermissionControllers.getRelationship
+    rolePermissionControllers.getRelationshipById
 )
 
 router.post('/role-permission', 

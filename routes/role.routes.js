@@ -12,7 +12,7 @@ router.get('/roles',
 router.get('/role/:roleId',
     check('roleId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
-    roleControllers.getRole
+    roleControllers.getRoleById
 )
 
 router.post('/role', 

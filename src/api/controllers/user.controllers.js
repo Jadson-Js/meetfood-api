@@ -17,7 +17,7 @@ const userControllers = {
         }
     },
 
-    async getUser(req, res) {
+    async getUserById(req, res) {
         const id = req.params.userId
 
         try {

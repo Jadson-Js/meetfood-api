@@ -15,7 +15,7 @@ const roleControllers = {
         }
     },
 
-    async getRole(req, res) {
+    async getRoleById(req, res) {
         const id = req.params.roleId
 
         try {

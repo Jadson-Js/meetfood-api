@@ -15,7 +15,7 @@ router.get('/user/:userId',
     verifyJwt,
     check('userId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
-    userControllers.getUser
+    userControllers.getUserById
 )
 
 router.post('/user',

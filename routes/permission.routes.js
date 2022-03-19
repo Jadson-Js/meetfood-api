@@ -12,7 +12,7 @@ router.get('/permissions',
 router.get('/permission/:permissionId',
     check('permissionId').isNumeric().withMessage(logDefault.invalidId),
     validResult,
-    permissionControllers.getPermission
+    permissionControllers.getPermissionById
 )
 
 router.post('/permission', 

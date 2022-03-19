@@ -17,7 +17,7 @@ const rolePermissionsControllers = {
         }
     },
 
-    async getRelationship(req, res) {
+    async getRelationshipById(req, res) {
         const id = req.params.relationshipId
 
         try {

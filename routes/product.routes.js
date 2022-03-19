@@ -9,6 +9,10 @@ router.get('/products',
     productControllers.getProducts
 )
 
+router.get('/product/:productId', 
+    productControllers.getProductById
+)
+
 router.post('/user/product',
     check('userId').isNumeric().withMessage(logDefault.invalidId),
     check('title').isString().isLength({ min: 1, max: 32 }).withMessage(logDefault.invalidTitle),

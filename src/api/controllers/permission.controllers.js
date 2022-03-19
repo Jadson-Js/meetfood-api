@@ -15,7 +15,7 @@ const permissionControllers = {
         }
     },
 
-    async getPermission(req, res) {
+    async getPermissionById(req, res) {
         const id = req.params.permissionId
 
         try {
