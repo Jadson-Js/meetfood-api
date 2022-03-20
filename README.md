@@ -38,6 +38,33 @@ HOST: http://localhost:3000
 + type: "DELETE"
 + rel: Delete the user.
 
+## Product
+### getProducts
++ href: "/products"
++ type: "GET"
++ rel: Returns data for all products.
+  
+### getProductById
++ href: "/product/:productId"
++ type: "GET"
++ rel: Returns the data of a single product.
+
+### createUserProduct
++ href: "/user/product"
++ type: "POST"
++ rel: Create a new product associated with a user.
++ body: {userId, title, description, price}
+
+### updateUserProduct
++ href: "/product/:productId"
++ type: "PUT"
++ rel: Edit product data.
++ body: {newTitle, newDescription, newPrice}
+
+### deleteUserProduct
++ href: "/product/:productId"
++ type: "DELETE"
++ rel: Delete the product.
 
 ## Role
 ### getRoles
