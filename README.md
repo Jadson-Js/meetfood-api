@@ -39,7 +39,7 @@ HOST: http://localhost:3000
 + rel: Delete the user.
 
 
-## roll
+## Role
 ### getRoles
 + href: "/roles"
 + type: "GET"
@@ -55,8 +55,30 @@ HOST: http://localhost:3000
 + type: "POST"
 + rel: Create a new role.
 + body: {title, description}
-+
+  
 ### deleteRole
 + href: "/role/:roleId"
 + type: "DELETE"
 + rel: Delete the role.
+
+## Permission
+### getPermissions
++ href: "/permissions"
++ type: "GET"
++ rel: Returns data for all permissions.
+  
+### getPermissionById
++ href: "/permission/:permissionId"
++ type: "GET"
++ rel: Returns the data of a single permission.
+
+### createPermission
++ href: "/permission"
++ type: "POST"
++ rel: Create a new permission.
++ body: {title, description}
+
+### deletePermission
++ href: "/permission/:permissionId"
++ type: "DELETE"
++ rel: Delete the permission.
