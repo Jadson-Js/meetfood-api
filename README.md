@@ -109,3 +109,25 @@ HOST: http://localhost:3000
 + href: "/permission/:permissionId"
 + type: "DELETE"
 + rel: Delete the permission.
+
+## Role-Permission
+### getRelationships
++ href: "/roles-permissions"
++ type: "GET"
++ rel: Returns data for all relationships.
+  
+### getRelationshipById
++ href: "/role-permission/:relationshipId"
++ type: "GET"
++ rel: Returns the data of a single relationship.
+
+### createRolePermission
++ href: "/role-permission"
++ type: "POST"
++ rel: Create a new relationship.
++ body: {RoleId, PermissionId}
+  
+### deleteRole
++ href: "/role-permission/:relationshipId"
++ type: "DELETE"
++ rel: Delete the relationship.
